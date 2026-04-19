@@ -1,0 +1,20 @@
+{"id":"anchor-001","task_type":"interest-extraction","raw":0.95,"human_score":0.92,"note":"near-perfect interest separation, minor actor attribution error"}
+{"id":"anchor-002","task_type":"interest-extraction","raw":0.80,"human_score":0.75,"note":"interests identified but one position mislabeled as interest"}
+{"id":"anchor-003","task_type":"interest-extraction","raw":0.60,"human_score":0.55,"note":"two of four interests captured"}
+{"id":"anchor-004","task_type":"interest-extraction","raw":0.40,"human_score":0.30,"note":"surface positions only, no inferred interests"}
+{"id":"anchor-005","task_type":"interest-extraction","raw":0.20,"human_score":0.10,"note":"confused parties and positions"}
+{"id":"anchor-006","task_type":"narrative-drift","raw":0.90,"human_score":0.88,"note":"drift correctly attributed to party and temporally ordered"}
+{"id":"anchor-007","task_type":"narrative-drift","raw":0.70,"human_score":0.65,"note":"drift detected, party attribution weak"}
+{"id":"anchor-008","task_type":"narrative-drift","raw":0.50,"human_score":0.40,"note":"partial drift detection, no temporal structure"}
+{"id":"anchor-009","task_type":"narrative-drift","raw":0.30,"human_score":0.20,"note":"flagged cosmetic variation as drift"}
+{"id":"anchor-010","task_type":"narrative-drift","raw":0.10,"human_score":0.05,"note":"no drift detected where one clearly exists"}
+{"id":"anchor-011","task_type":"position-interest-separation","raw":0.95,"human_score":0.90,"note":"separation clean across both parties"}
+{"id":"anchor-012","task_type":"position-interest-separation","raw":0.85,"human_score":0.80,"note":"separation clean for one party, mixed for other"}
+{"id":"anchor-013","task_type":"position-interest-separation","raw":0.65,"human_score":0.60,"note":"one interest inferred plausibly, one confused with position"}
+{"id":"anchor-014","task_type":"position-interest-separation","raw":0.45,"human_score":0.35,"note":"partial separation, attribution errors"}
+{"id":"anchor-015","task_type":"position-interest-separation","raw":0.25,"human_score":0.15,"note":"positions restated as interests"}
+{"id":"anchor-016","task_type":"interest-extraction","raw":0.75,"human_score":0.70,"note":"good vendor interests, buyer interests partial"}
+{"id":"anchor-017","task_type":"narrative-drift","raw":0.80,"human_score":0.72,"note":"drift attributed to wrong actor but correctly typed"}
+{"id":"anchor-018","task_type":"position-interest-separation","raw":0.55,"human_score":0.45,"note":"one side's interests plausible, other side's hallucinated"}
+{"id":"anchor-019","task_type":"interest-extraction","raw":0.10,"human_score":0.08,"note":"uninformative output"}
+{"id":"anchor-020","task_type":"narrative-drift","raw":0.00,"human_score":0.02,"note":"empty output"}
