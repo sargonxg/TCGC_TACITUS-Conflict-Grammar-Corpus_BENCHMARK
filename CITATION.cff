@@ -1,0 +1,21 @@
+cff-version: 1.2.0
+title: "TCGC: The TACITUS Conflict Grammar Corpus"
+message: "If you use this corpus or the harness, please cite it as below."
+type: dataset
+authors:
+  - given-names: Giulio
+    family-names: Catanzariti
+    email: giuliocatanzariti@gmail.com
+    affiliation: TACITUS
+repository-code: "https://github.com/tacitus-me/tcgc"
+url: "https://www.tacitus.me/research/tcgc"
+license: CC-BY-NC-SA-4.0
+version: "0.1.0"
+date-released: "2026-04-18"
+keywords:
+  - benchmark
+  - natural language processing
+  - conflict analysis
+  - ontology
+  - neurosymbolic AI
+  - evaluation
