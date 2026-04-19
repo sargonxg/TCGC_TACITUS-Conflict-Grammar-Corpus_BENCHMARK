@@ -1,9 +1,13 @@
 """Tests for tcgc.cli via typer.testing.CliRunner."""
+
 from __future__ import annotations
+
 import json
 from pathlib import Path
+
 import pytest
 from typer.testing import CliRunner
+
 from tcgc.cli import app
 
 runner = CliRunner()
@@ -48,7 +52,9 @@ def test_score_command(sample_items_dir: Path, tmp_path: Path) -> None:
         pred.update(item["gold"])
         preds.append(json.dumps(pred))
     preds_path.write_text("\n".join(preds))
-    result = runner.invoke(app, ["score", str(preds_path), str(sample_items_dir), "--out", str(out_path)])
+    result = runner.invoke(
+        app, ["score", str(preds_path), str(sample_items_dir), "--out", str(out_path)]
+    )
     assert result.exit_code == 0, result.output
     scores = json.loads(out_path.read_text())
     assert "per_item" in scores
@@ -90,7 +96,9 @@ def test_score_no_prediction(sample_items_dir: Path, tmp_path: Path) -> None:
     preds_path = tmp_path / "empty.jsonl"
     preds_path.write_text("")
     out_path = tmp_path / "scores.json"
-    result = runner.invoke(app, ["score", str(preds_path), str(sample_items_dir), "--out", str(out_path)])
+    result = runner.invoke(
+        app, ["score", str(preds_path), str(sample_items_dir), "--out", str(out_path)]
+    )
     assert result.exit_code == 0
     scores = json.loads(out_path.read_text())
     assert scores["overall"] == pytest.approx(0.0)

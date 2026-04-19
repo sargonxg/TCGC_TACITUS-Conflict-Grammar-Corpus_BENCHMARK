@@ -1,5 +1,7 @@
 """Tests for tcgc.adapters.lm_eval — skipped if lm_eval not installed."""
+
 from __future__ import annotations
+
 import pytest
 
 lm_eval = pytest.importorskip("lm_eval", reason="lm_eval not installed; skipping adapter test")
@@ -7,6 +9,7 @@ lm_eval = pytest.importorskip("lm_eval", reason="lm_eval not installed; skipping
 
 def test_lm_eval_task_registry_has_14_tasks() -> None:
     from tcgc.adapters.lm_eval import TASK_REGISTRY
+
     assert len(TASK_REGISTRY) == 14
 
 

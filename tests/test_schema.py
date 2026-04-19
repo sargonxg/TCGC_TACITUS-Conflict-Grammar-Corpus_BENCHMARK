@@ -1,10 +1,14 @@
 """Tests for schema validity and sample item conformance."""
+
 from __future__ import annotations
+
 from pathlib import Path
-import pytest
+
 import jsonschema
-from tcgc.validate import load_schema
+import pytest
+
 from tcgc.io import load_item
+from tcgc.validate import load_schema
 
 
 def test_schema_well_formed() -> None:
@@ -21,13 +25,16 @@ def test_all_sample_items_conform_to_schema(sample_items_dir: Path) -> None:
         assert not errors, f"{p.name}: {[e.message for e in errors]}"
 
 
-@pytest.mark.parametrize("filename", [
-    "tcgc-0001.json",
-    "tcgc-0002.json",
-    "tcgc-0003.json",
-    "tcgc-0004.json",
-    "tcgc-0005.json",
-])
+@pytest.mark.parametrize(
+    "filename",
+    [
+        "tcgc-0001.json",
+        "tcgc-0002.json",
+        "tcgc-0003.json",
+        "tcgc-0004.json",
+        "tcgc-0005.json",
+    ],
+)
 def test_each_item_individually(sample_items_dir: Path, filename: str) -> None:
     schema = load_schema()
     validator = jsonschema.Draft202012Validator(schema)

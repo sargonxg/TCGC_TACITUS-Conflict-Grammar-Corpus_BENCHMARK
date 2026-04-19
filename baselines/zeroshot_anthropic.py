@@ -1,5 +1,7 @@
 """Zero-shot Anthropic/Claude baseline for TCGC."""
+
 import os
+
 if os.environ.get("TCGC_RUN_BASELINES") != "1":  # pragma: no cover
     raise RuntimeError("Set TCGC_RUN_BASELINES=1 to enable this baseline.")
 
@@ -14,6 +16,7 @@ Return ONLY valid JSON. No explanation."""
 def predict(item_id: str, inputs: dict[str, Any]) -> dict[str, Any]:
     """Return a prediction matching the gold shape for the item's task_type."""
     import anthropic  # type: ignore[import-not-found]
+
     client = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
     user_msg = f"Question: {inputs['question']}\n\nInput:\n{json.dumps(inputs, indent=2)}"
     message = client.messages.create(

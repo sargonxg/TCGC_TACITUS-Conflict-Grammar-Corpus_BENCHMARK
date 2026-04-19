@@ -1,6 +1,9 @@
 """Tests for tcgc.scoring.contradiction_pair_f1."""
+
 from __future__ import annotations
+
 import pytest
+
 from tcgc.scoring.contradiction_pair_f1 import score
 
 

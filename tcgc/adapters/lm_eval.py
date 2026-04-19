@@ -1,17 +1,20 @@
 """lm-evaluation-harness adapter for TCGC."""
+
 from __future__ import annotations
+
 try:
-    from lm_eval.api.task import ConfigurableTask  # type: ignore[import-not-found]
+    from lm_eval.api.task import ConfigurableTask
 except ImportError:
     raise ImportError("Install tcgc[adapters] and lm-eval to use this adapter.") from None
 
 import json
 from typing import Any
+
 from tcgc.adapters._common import load_split
 from tcgc.scoring import REGISTRY
 
 
-class TCGCTask(ConfigurableTask):
+class TCGCTask(ConfigurableTask):  # type: ignore[misc]
     """Base lm-eval task for TCGC. Subclassed per task_type."""
 
     VERSION = 0
@@ -75,11 +78,19 @@ def _make_task_class(task_type: str) -> type:
 TASK_REGISTRY: dict[str, type] = {
     f"tcgc_{tt.replace('-', '_')}": _make_task_class(tt)
     for tt in [
-        "actor-resolution", "claim-extraction", "interest-extraction",
-        "constraint-extraction", "leverage-mapping", "commitment-tracking",
-        "event-ordering", "narrative-drift", "causal-chain",
-        "contradiction-detection", "provenance-attribution",
-        "commitment-claim-mismatch", "position-interest-separation",
+        "actor-resolution",
+        "claim-extraction",
+        "interest-extraction",
+        "constraint-extraction",
+        "leverage-mapping",
+        "commitment-tracking",
+        "event-ordering",
+        "narrative-drift",
+        "causal-chain",
+        "contradiction-detection",
+        "provenance-attribution",
+        "commitment-claim-mismatch",
+        "position-interest-separation",
         "cross-document-synthesis",
     ]
 }

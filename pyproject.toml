@@ -54,6 +54,16 @@ target-version = "py311"
 select = ["E","F","W","I","N","UP","B","A","C4","SIM","PL","RUF"]
 ignore = ["PLR0913"]
 
+[tool.ruff.lint.per-file-ignores]
+"baselines/**" = ["PLC0415", "E501"]
+"tests/**" = ["PLR2004", "PLC0415", "RUF043"]
+"synthetic/**" = ["PLC0415"]
+"tcgc/cli.py" = ["PLC0415"]
+"tcgc/ontology/aco.py" = ["E501"]
+"tcgc/scoring/llm_judge_anchored.py" = ["PLC0415", "PLR2004"]
+"tcgc/scoring/graph_overlap.py" = ["PLR2004", "E501"]
+"tcgc/validate.py" = ["E501"]
+
 [tool.mypy]
 python_version = "3.11"
 strict = true

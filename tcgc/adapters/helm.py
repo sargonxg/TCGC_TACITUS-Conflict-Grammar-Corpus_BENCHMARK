@@ -1,21 +1,32 @@
 """HELM adapter for TCGC."""
+
 from __future__ import annotations
+
+from typing import ClassVar
+
 try:
-    from helm.benchmark.scenarios.scenario import Scenario, Instance, Reference, CORRECT_TAG, Input, Output
+    from helm.benchmark.scenarios.scenario import (
+        CORRECT_TAG,
+        Input,
+        Instance,
+        Output,
+        Reference,
+        Scenario,
+    )
 except ImportError:
     raise ImportError("Install tcgc[adapters] and HELM to use this adapter.") from None
 
 import json
-from typing import Any
+
 from tcgc.adapters._common import load_split
 
 
-class TCGCScenario(Scenario):
+class TCGCScenario(Scenario):  # type: ignore[misc]
     """HELM Scenario that emits one Instance per TCGC item."""
 
     name = "tcgc"
     description = "TACITUS Conflict Grammar Corpus benchmark."
-    tags: list[str] = ["conflict", "reasoning"]
+    tags: ClassVar[list[str]] = ["conflict", "reasoning"]
 
     def __init__(self, split: str = "v0.1-sample") -> None:
         super().__init__()
@@ -31,9 +42,11 @@ class TCGCScenario(Scenario):
                 f"Input: {json.dumps(item['inputs'])}"
             )
             gold_text = json.dumps(item["gold"])
-            instances.append(Instance(
-                input=Input(text=input_text),
-                references=[Reference(output=Output(text=gold_text), tags=[CORRECT_TAG])],
-                split=self.split,
-            ))
+            instances.append(
+                Instance(
+                    input=Input(text=input_text),
+                    references=[Reference(output=Output(text=gold_text), tags=[CORRECT_TAG])],
+                    split=self.split,
+                )
+            )
         return instances

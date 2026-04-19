@@ -1,6 +1,9 @@
 """SYSTEM_CARD stub renderer."""
+
 from __future__ import annotations
+
 from typing import Any
+
 from tcgc.reporting.summary import render_markdown
 
 

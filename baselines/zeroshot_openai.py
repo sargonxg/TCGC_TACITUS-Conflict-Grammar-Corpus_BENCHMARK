@@ -1,5 +1,7 @@
 """Zero-shot OpenAI baseline for TCGC."""
+
 import os
+
 if os.environ.get("TCGC_RUN_BASELINES") != "1":  # pragma: no cover
     raise RuntimeError("Set TCGC_RUN_BASELINES=1 to enable this baseline.")
 
@@ -14,6 +16,7 @@ Return ONLY valid JSON. No explanation."""
 def predict(item_id: str, inputs: dict[str, Any]) -> dict[str, Any]:
     """Return a prediction matching the gold shape for the item's task_type."""
     from openai import OpenAI  # type: ignore[import-not-found]
+
     client = OpenAI(api_key=os.environ["OPENAI_API_KEY"])
     user_msg = f"Question: {inputs['question']}\n\nInput:\n{json.dumps(inputs, indent=2)}"
     response = client.chat.completions.create(

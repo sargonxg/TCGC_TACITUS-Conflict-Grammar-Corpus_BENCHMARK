@@ -1,7 +1,11 @@
 """Tests for tcgc.scoring.llm_judge_anchored."""
+
 from __future__ import annotations
+
 import os
+
 import pytest
+
 from tcgc.scoring.llm_judge_anchored import score
 
 

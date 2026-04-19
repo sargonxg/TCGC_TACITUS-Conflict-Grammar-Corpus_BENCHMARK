@@ -1,5 +1,7 @@
 """RAG baseline for TCGC — embed, retrieve, extract."""
+
 import os
+
 if os.environ.get("TCGC_RUN_BASELINES") != "1":  # pragma: no cover
     raise RuntimeError("Set TCGC_RUN_BASELINES=1 to enable this baseline.")
 
@@ -20,9 +22,9 @@ def _get_chunks(inputs: dict[str, Any]) -> list[str]:
 
 def predict(item_id: str, inputs: dict[str, Any]) -> dict[str, Any]:
     """Embed chunks, retrieve top-k, extract with OpenAI."""
-    from sentence_transformers import SentenceTransformer  # type: ignore[import-not-found]
     import numpy as np
     from openai import OpenAI  # type: ignore[import-not-found]
+    from sentence_transformers import SentenceTransformer  # type: ignore[import-not-found]
 
     model = SentenceTransformer("all-MiniLM-L6-v2")
     chunks = _get_chunks(inputs)

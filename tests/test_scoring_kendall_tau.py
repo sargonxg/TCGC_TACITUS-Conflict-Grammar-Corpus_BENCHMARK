@@ -1,8 +1,11 @@
 """Tests for tcgc.scoring.kendall_tau."""
+
 from __future__ import annotations
+
 import pytest
 from hypothesis import given, settings
 from hypothesis import strategies as st
+
 from tcgc.scoring.kendall_tau import score
 
 

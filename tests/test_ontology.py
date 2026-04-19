@@ -1,11 +1,23 @@
 """Tests for tcgc.ontology."""
+
 from __future__ import annotations
+
 import pytest
-from tcgc.ontology import EDGE_TYPES, PRIMITIVES, Edge, Primitive, similarity, validate_type
+
+from tcgc.ontology import EDGE_TYPES, PRIMITIVES, similarity, validate_type
 
 
 def test_primitive_enum_members() -> None:
-    expected = {"actor", "claim", "interest", "constraint", "leverage", "commitment", "event", "narrative"}
+    expected = {
+        "actor",
+        "claim",
+        "interest",
+        "constraint",
+        "leverage",
+        "commitment",
+        "event",
+        "narrative",
+    }
     assert set(PRIMITIVES) == expected
 
 

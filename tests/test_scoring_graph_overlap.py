@@ -1,9 +1,12 @@
 """Tests for tcgc.scoring.graph_overlap."""
+
 from __future__ import annotations
+
 import pytest
 from hypothesis import given, settings
 from hypothesis import strategies as st
-from tcgc.scoring.graph_overlap import ScoreResult, score
+
+from tcgc.scoring.graph_overlap import score
 
 
 def _make_gold(primitives: list[dict], edges: list[dict]) -> dict:  # type: ignore[type-arg]
@@ -79,7 +82,8 @@ def test_no_pred_edges_note() -> None:
 @given(
     st.lists(
         st.fixed_dictionaries({"id": st.text(min_size=1, max_size=3), "type": st.just("actor")}),
-        min_size=0, max_size=5,
+        min_size=0,
+        max_size=5,
     )
 )
 def test_subgraph_deletion_monotone(primitives: list[dict]) -> None:  # type: ignore[type-arg]

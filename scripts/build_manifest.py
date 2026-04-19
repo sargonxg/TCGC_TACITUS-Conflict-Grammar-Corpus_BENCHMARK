@@ -1,8 +1,10 @@
 """Regenerate items/manifest.json with SHA-256 hashes of all items."""
+
 from __future__ import annotations
+
 import hashlib
 import json
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 
 
@@ -21,7 +23,7 @@ def main() -> None:
         entries.append({"id": item["id"], "path": rel, "sha256": _sha256(p)})
     manifest = {
         "version": "v0.1",
-        "generated": datetime.now(timezone.utc).isoformat(),
+        "generated": datetime.now(UTC).isoformat(),
         "items": entries,
     }
     out = items_dir / "manifest.json"

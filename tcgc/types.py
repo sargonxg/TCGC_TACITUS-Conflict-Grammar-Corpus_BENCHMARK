@@ -1,5 +1,7 @@
 """StrEnums and the canonical task_type -> metric map."""
+
 from __future__ import annotations
+
 from enum import StrEnum
 
 
@@ -39,18 +41,18 @@ class Metric(StrEnum):
 
 
 TASK_METRIC_MAP: dict[str, str] = {
-    TaskType.ACTOR_RESOLUTION:             Metric.GRAPH_OVERLAP,
-    TaskType.CLAIM_EXTRACTION:             Metric.GRAPH_OVERLAP,
-    TaskType.INTEREST_EXTRACTION:          Metric.LLM_JUDGE_ANCHORED,
-    TaskType.CONSTRAINT_EXTRACTION:        Metric.GRAPH_OVERLAP,
-    TaskType.LEVERAGE_MAPPING:             Metric.GRAPH_OVERLAP,
-    TaskType.COMMITMENT_TRACKING:          Metric.GRAPH_OVERLAP,
-    TaskType.EVENT_ORDERING:               Metric.KENDALL_TAU,
-    TaskType.NARRATIVE_DRIFT:              Metric.LLM_JUDGE_ANCHORED,
-    TaskType.CAUSAL_CHAIN:                 Metric.GRAPH_OVERLAP,
-    TaskType.CONTRADICTION_DETECTION:      Metric.CONTRADICTION_PAIR_F1,
-    TaskType.PROVENANCE_ATTRIBUTION:       Metric.PROVENANCE_F1,
-    TaskType.COMMITMENT_CLAIM_MISMATCH:    Metric.GRAPH_OVERLAP,
+    TaskType.ACTOR_RESOLUTION: Metric.GRAPH_OVERLAP,
+    TaskType.CLAIM_EXTRACTION: Metric.GRAPH_OVERLAP,
+    TaskType.INTEREST_EXTRACTION: Metric.LLM_JUDGE_ANCHORED,
+    TaskType.CONSTRAINT_EXTRACTION: Metric.GRAPH_OVERLAP,
+    TaskType.LEVERAGE_MAPPING: Metric.GRAPH_OVERLAP,
+    TaskType.COMMITMENT_TRACKING: Metric.GRAPH_OVERLAP,
+    TaskType.EVENT_ORDERING: Metric.KENDALL_TAU,
+    TaskType.NARRATIVE_DRIFT: Metric.LLM_JUDGE_ANCHORED,
+    TaskType.CAUSAL_CHAIN: Metric.GRAPH_OVERLAP,
+    TaskType.CONTRADICTION_DETECTION: Metric.CONTRADICTION_PAIR_F1,
+    TaskType.PROVENANCE_ATTRIBUTION: Metric.PROVENANCE_F1,
+    TaskType.COMMITMENT_CLAIM_MISMATCH: Metric.GRAPH_OVERLAP,
     TaskType.POSITION_INTEREST_SEPARATION: Metric.LLM_JUDGE_ANCHORED,
-    TaskType.CROSS_DOCUMENT_SYNTHESIS:     Metric.GRAPH_OVERLAP,
+    TaskType.CROSS_DOCUMENT_SYNTHESIS: Metric.GRAPH_OVERLAP,
 }

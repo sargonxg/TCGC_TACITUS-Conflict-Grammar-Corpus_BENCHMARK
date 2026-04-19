@@ -1,7 +1,11 @@
 """Tests for tcgc.io."""
+
 from __future__ import annotations
+
 from pathlib import Path
+
 import pytest
+
 from tcgc.io import dump_json, load_item, load_items, read_predictions, write_predictions
 
 
@@ -42,5 +46,6 @@ def test_dump_json(tmp_path: Path) -> None:
     out = tmp_path / "out.json"
     dump_json(obj, out)
     import json
+
     loaded = json.loads(out.read_text())
     assert loaded == obj

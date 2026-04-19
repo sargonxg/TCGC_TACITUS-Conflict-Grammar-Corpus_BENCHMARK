@@ -1,12 +1,16 @@
 """Scorer registry."""
+
 from __future__ import annotations
+
 from collections.abc import Callable
 from typing import Any
-from tcgc.scoring.graph_overlap import ScoreResult, score as graph_overlap_score
-from tcgc.scoring.provenance_f1 import score as provenance_f1_score
-from tcgc.scoring.kendall_tau import score as kendall_tau_score
+
 from tcgc.scoring.contradiction_pair_f1 import score as contradiction_pair_f1_score
+from tcgc.scoring.graph_overlap import ScoreResult
+from tcgc.scoring.graph_overlap import score as graph_overlap_score
+from tcgc.scoring.kendall_tau import score as kendall_tau_score
 from tcgc.scoring.llm_judge_anchored import score as llm_judge_anchored_score
+from tcgc.scoring.provenance_f1 import score as provenance_f1_score
 
 Scorer = Callable[[dict[str, Any], dict[str, Any]], ScoreResult]
 

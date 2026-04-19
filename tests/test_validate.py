@@ -1,9 +1,12 @@
 """Tests for tcgc.validate."""
+
 from __future__ import annotations
+
 from pathlib import Path
-import pytest
-from tcgc.validate import Report, _validate_item, load_schema, validate_path
+
 import jsonschema
+
+from tcgc.validate import Report, _validate_item, load_schema, validate_path
 
 
 def _validator() -> jsonschema.Draft202012Validator:
@@ -23,6 +26,7 @@ def test_all_sample_items_valid(sample_items_dir: Path) -> None:
 
 def test_report_ok_property() -> None:
     from tcgc.validate import Issue
+
     r = Report()
     r.by_path["x"] = []
     assert r.ok
@@ -32,6 +36,7 @@ def test_report_ok_property() -> None:
 
 def test_report_as_dict() -> None:
     from tcgc.validate import Issue
+
     r = Report()
     r.by_path["x"] = [Issue("p", "warning", "dangling-node", "msg")]
     d = r.as_dict()

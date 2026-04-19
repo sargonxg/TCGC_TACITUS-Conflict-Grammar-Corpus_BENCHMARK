@@ -9,7 +9,9 @@ Usage:
 
 Requires: ANTHROPIC_API_KEY env var and pip install anthropic jinja2
 """
+
 from __future__ import annotations
+
 import argparse
 import json
 import os
@@ -40,17 +42,21 @@ id format: "tcgc-SYNTH-{{{{ '%04d'|format(index) }}}}"
 def render(template: str, **kwargs: object) -> str:
     try:
         from jinja2 import Template  # type: ignore[import-not-found]
+
         return Template(template).render(**kwargs)
     except ImportError:
-        return template.replace("{{ domain }}", str(kwargs.get("domain", ""))) \
-                       .replace("{{ actor_count }}", str(kwargs.get("actor_count", 2))) \
-                       .replace("{{ modality }}", str(kwargs.get("modality", "messages"))) \
-                       .replace("{{ index }}", str(kwargs.get("index", 0))) \
-                       .replace("{{ date }}", str(kwargs.get("date", date.today())))
+        return (
+            template.replace("{{ domain }}", str(kwargs.get("domain", "")))
+            .replace("{{ actor_count }}", str(kwargs.get("actor_count", 2)))
+            .replace("{{ modality }}", str(kwargs.get("modality", "messages")))
+            .replace("{{ index }}", str(kwargs.get("index", 0)))
+            .replace("{{ date }}", str(kwargs.get("date", date.today())))
+        )
 
 
 def generate_item(prompt: str, model: str = "claude-opus-4-7") -> dict:  # type: ignore[type-arg]
     import anthropic  # type: ignore[import-not-found]
+
     client = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
     msg = client.messages.create(
         model=model,
@@ -65,8 +71,10 @@ def generate_item(prompt: str, model: str = "claude-opus-4-7") -> dict:  # type:
 
 
 def validate_item(item: dict) -> bool:  # type: ignore[type-arg]
-    from tcgc.validate import validate_path
     import tempfile
+
+    from tcgc.validate import validate_path
+
     with tempfile.NamedTemporaryFile(suffix=".json", mode="w", delete=False) as f:
         json.dump(item, f)
         tmp = Path(f.name)
@@ -95,15 +103,21 @@ def main() -> None:
 
     while generated < args.count and attempts < args.count * 3:
         attempts += 1
-        prompt = render(template, task_type=args.task_type, domain=args.domain,
-                        actor_count=args.actor_count, modality=args.modality,
-                        index=generated + 1, date=date.today())
+        prompt = render(
+            template,
+            task_type=args.task_type,
+            domain=args.domain,
+            actor_count=args.actor_count,
+            modality=args.modality,
+            index=generated + 1,
+            date=date.today(),
+        )
         try:
             item = generate_item(prompt, model=args.model)
             if not item:
                 print(f"  attempt {attempts}: empty response, retrying...")
                 continue
-            item_id = item.get("id", f"tcgc-SYNTH-{generated+1:04d}")
+            item_id = item.get("id", f"tcgc-SYNTH-{generated + 1:04d}")
             out_path = args.out / f"{item_id}.json"
             out_path.write_text(json.dumps(item, indent=2, ensure_ascii=False))
             valid = validate_item(item)
