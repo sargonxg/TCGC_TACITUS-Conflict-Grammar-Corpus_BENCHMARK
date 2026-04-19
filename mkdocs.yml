@@ -1,0 +1,41 @@
+site_name: TCGC
+site_description: The TACITUS Conflict Grammar Corpus
+site_url: https://tacitus-me.github.io/tcgc/
+repo_url: https://github.com/sargonxg/TCGC_TACITUS-Conflict-Grammar-Corpus_BENCHMARK
+repo_name: TCGC
+
+theme:
+  name: material
+  palette:
+    - scheme: default
+      primary: black
+      accent: deep orange
+  features:
+    - navigation.sections
+    - navigation.expand
+    - content.code.copy
+    - content.code.annotate
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.highlight
+  - pymdownx.superfences
+  - pymdownx.inlinehilite
+  - pymdownx.details
+
+nav:
+  - Home: index.md
+  - Quickstart: quickstart.md
+  - Task types: task-types.md
+  - Domains: domains.md
+  - Metrics: metrics.md
+  - Methodology: methodology.md
+  - Agreement: agreement.md
+  - Open questions: open-questions.md
+  - Submission guide: submission-guide.md
+  - Leaderboard: leaderboard.md
+  - Roadmap: roadmap.md
