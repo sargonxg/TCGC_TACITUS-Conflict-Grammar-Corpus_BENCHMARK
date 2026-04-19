@@ -1,0 +1,39 @@
+name: Leaderboard Submission
+description: Submit a system to the TCGC leaderboard
+labels: ["submission"]
+body:
+  - type: input
+    id: system-name
+    attributes:
+      label: System name
+      placeholder: "e.g. My RAG System v2.0"
+    validations:
+      required: true
+  - type: input
+    id: system-version
+    attributes:
+      label: System version
+      placeholder: "e.g. 2.0.1"
+    validations:
+      required: true
+  - type: input
+    id: contact
+    attributes:
+      label: Contact email
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: System description
+      description: One paragraph describing the system architecture.
+    validations:
+      required: true
+  - type: input
+    id: scorer-commit
+    attributes:
+      label: Scorer commit SHA
+      description: The git commit of the TCGC scorer used for your run.
+      placeholder: "e.g. abc1234"
+    validations:
+      required: true

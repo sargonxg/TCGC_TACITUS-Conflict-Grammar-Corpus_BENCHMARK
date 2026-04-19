@@ -1,0 +1,11 @@
+{
+  "schema": "submission-v0.1",
+  "updated": "2026-04-19",
+  "entries": [
+    {"system_name":"TACITUS Dialectica (reference)","status":"pending","v0.1_sample":null,"full":null,"card":null},
+    {"system_name":"GPT-4-class zero-shot","status":"pending","v0.1_sample":null,"full":null,"card":null},
+    {"system_name":"Claude 3-class zero-shot","status":"pending","v0.1_sample":null,"full":null,"card":null},
+    {"system_name":"Strong RAG baseline","status":"pending","v0.1_sample":null,"full":null,"card":null},
+    {"system_name":"GraphRAG baseline","status":"pending","v0.1_sample":null,"full":null,"card":null}
+  ]
+}

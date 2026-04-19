@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tacitus.me/research/tcgc/schema/submission-v0.1.json",
+  "title": "TCGC leaderboard submission",
+  "type": "object",
+  "required": ["system_name","system_version","contact_email","predictions_path","system_card_path","scorer_commit"],
+  "additionalProperties": false,
+  "properties": {
+    "system_name":      {"type":"string"},
+    "system_version":   {"type":"string"},
+    "contact_email":    {"type":"string","format":"email"},
+    "predictions_path": {"type":"string"},
+    "system_card_path": {"type":"string"},
+    "scorer_commit":    {"type":"string","pattern":"^[a-f0-9]{7,40}$"}
+  }
+}

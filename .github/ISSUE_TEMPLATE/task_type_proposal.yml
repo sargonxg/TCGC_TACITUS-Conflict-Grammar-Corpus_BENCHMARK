@@ -1,0 +1,39 @@
+name: Task Type Proposal (Tier 04)
+description: Propose a new TCGC task type for v0.2+
+labels: ["task-type-proposal", "v0.2"]
+body:
+  - type: textarea
+    id: motivation
+    attributes:
+      label: Motivation
+      description: One paragraph explaining why this task type is needed and what failure mode it exposes.
+    validations:
+      required: true
+  - type: textarea
+    id: example
+    attributes:
+      label: Worked example
+      description: A minimal example item in TCGC JSON format (or close to it).
+    validations:
+      required: true
+  - type: input
+    id: metric
+    attributes:
+      label: Suggested metric
+      placeholder: "e.g. graph_overlap, llm_judge_anchored"
+    validations:
+      required: true
+  - type: textarea
+    id: metric-rationale
+    attributes:
+      label: Metric rationale
+      description: Why does this metric fit?
+    validations:
+      required: true
+  - type: input
+    id: domains
+    attributes:
+      label: Domain(s)
+      placeholder: "e.g. diplomatic, governance"
+    validations:
+      required: true
