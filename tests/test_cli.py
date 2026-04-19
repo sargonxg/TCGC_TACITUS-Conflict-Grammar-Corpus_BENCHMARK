@@ -67,3 +67,30 @@ def test_report_command(sample_items_dir: Path, tmp_path: Path) -> None:
     result = runner.invoke(app, ["report", str(scores_path)])
     assert result.exit_code == 0
     assert "overall" in result.output
+
+
+def test_card_command(tmp_path: Path) -> None:
+    scores_data = {
+        "per_item": [{"task_type": "commitment-tracking", "domain": "workplace", "value": 1.0}],
+        "per_task_type": {"commitment-tracking": 1.0},
+        "per_domain": {"workplace": 1.0},
+        "overall": 1.0,
+    }
+    scores_path = tmp_path / "scores.json"
+    scores_path.write_text(json.dumps(scores_data))
+    out_path = tmp_path / "card.md"
+    result = runner.invoke(app, ["card", str(scores_path), "--out", str(out_path)])
+    assert result.exit_code == 0
+    card_text = out_path.read_text()
+    assert "SYSTEM_CARD" in card_text
+    assert "overall" in card_text
+
+
+def test_score_no_prediction(sample_items_dir: Path, tmp_path: Path) -> None:
+    preds_path = tmp_path / "empty.jsonl"
+    preds_path.write_text("")
+    out_path = tmp_path / "scores.json"
+    result = runner.invoke(app, ["score", str(preds_path), str(sample_items_dir), "--out", str(out_path)])
+    assert result.exit_code == 0
+    scores = json.loads(out_path.read_text())
+    assert scores["overall"] == pytest.approx(0.0)
