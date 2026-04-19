@@ -1,0 +1,24 @@
+You are generating a synthetic TCGC benchmark item for task type `commitment-tracking` in the `{{ domain }}` domain.
+
+Generate a realistic, specific scenario with {{ actor_count }} named actors communicating via {{ modality }}.
+
+The scenario must:
+1. Include a clear commitment being made (verbal or written)
+2. Include an ambiguous acknowledgment or later denial
+3. Be grounded enough that provenance can be attributed to specific messages/turns
+
+Return a valid TCGC JSON item with these fields:
+- id: "tcgc-SYNTH-{{ "%04d"|format(index) }}"
+- task_type: "commitment-tracking"
+- domain: "{{ domain }}"
+- license: "CC-BY-NC-SA-4.0"
+- source: { "collection": "v0.1-synthetic", "collected_on": "{{ date }}", "annotators": ["SYNTH-LLM"], "inter_annotator_kappa": null }
+- inputs: { "{{ modality }}": [...], "question": "..." }
+- gold: { "commitment_id": "...", "subject": "...", "deadline": "...", "status": "...", "primitives": [...], "edges": [...] }
+- rubric: { "scoring": "graph_overlap", "graph_overlap_target": 0.85 }
+
+Rules:
+- Every primitive must have a provenance field referencing an id in inputs
+- Every edge must reference valid primitive ids
+- The commitment status must be one of: active, fulfilled, contested, revoked
+- Return ONLY the JSON object, no explanation

@@ -1,0 +1,31 @@
+{
+  "version": "v0.1",
+  "generated": "2026-04-19T14:51:22.374027+00:00",
+  "items": [
+    {
+      "id": "tcgc-0001",
+      "path": "items/v0.1-sample/tcgc-0001.json",
+      "sha256": "83bd412035ac0a5359ced34252ee7c0894a651faaee768b87bcd900b6f8357a1"
+    },
+    {
+      "id": "tcgc-0002",
+      "path": "items/v0.1-sample/tcgc-0002.json",
+      "sha256": "fabc1cdd8c27346140f596fb08621da7ea37f81ae42aaf9b48339b57084124cd"
+    },
+    {
+      "id": "tcgc-0003",
+      "path": "items/v0.1-sample/tcgc-0003.json",
+      "sha256": "527fafe516c1c51db5d591a8d4a76727a3db06b615b4fabd7f72dc5726e64957"
+    },
+    {
+      "id": "tcgc-0004",
+      "path": "items/v0.1-sample/tcgc-0004.json",
+      "sha256": "5cd3fc0699999a70bd8fa1956afa15251906d278bea5a992beca212b7a3dcd21"
+    },
+    {
+      "id": "tcgc-0005",
+      "path": "items/v0.1-sample/tcgc-0005.json",
+      "sha256": "b6e2991890e878c8d76f5f4906e2b202dc1cd24bb94b56808f6bf49126385302"
+    }
+  ]
+}
