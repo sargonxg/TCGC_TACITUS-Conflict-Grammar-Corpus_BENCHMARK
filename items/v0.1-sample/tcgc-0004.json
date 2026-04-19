@@ -1,0 +1,50 @@
+{
+  "id": "tcgc-0004",
+  "task_type": "interest-extraction",
+  "domain": "commercial",
+  "license": "CC-BY-NC-SA-4.0",
+  "source": {
+    "collection": "v0.1-sample",
+    "collected_on": "2026-03-14",
+    "annotators": ["A1","A2","A3"],
+    "inter_annotator_kappa": 0.64
+  },
+  "inputs": {
+    "transcript": [
+      { "turn": 1, "speaker": "Vendor", "text": "We cannot move below the list price. It is a matter of principle for us at this stage of the quarter." },
+      { "turn": 2, "speaker": "Buyer",  "text": "Then we will have to shelve the rollout. We committed internally to a per-seat cost ceiling and I am not able to go above it." },
+      { "turn": 3, "speaker": "Vendor", "text": "A pilot could be structured differently. Smaller footprint, executive visibility, an expansion option." },
+      { "turn": 4, "speaker": "Buyer",  "text": "Our board wants to see credible traction in this category before the next funding round." }
+    ],
+    "question": "Extract the underlying interests of each party, distinct from their stated positions. Interests are inferred; positions are stated."
+  },
+  "gold": {
+    "primitives": [
+      { "id": "vendor", "type": "actor", "label": "Vendor", "provenance": "turn:1" },
+      { "id": "buyer",  "type": "actor", "label": "Buyer",  "provenance": "turn:2" },
+      { "id": "pos_vendor", "type": "claim", "label": "position: hold list price", "provenance": "turn:1" },
+      { "id": "pos_buyer",  "type": "claim", "label": "position: refuse above per-seat ceiling", "provenance": "turn:2" },
+      { "id": "int_vendor_quarter", "type": "interest",
+        "label": "protect quarterly revenue-recognition optics and precedent for enterprise deals",
+        "provenance": ["turn:1","turn:3"] },
+      { "id": "int_vendor_expand",  "type": "interest",
+        "label": "open a channel for future expansion revenue", "provenance": "turn:3" },
+      { "id": "int_buyer_board",    "type": "interest",
+        "label": "credible category traction to support next funding round", "provenance": "turn:4" },
+      { "id": "int_buyer_internal", "type": "interest",
+        "label": "honor internal commitment to per-seat cost discipline", "provenance": "turn:2" }
+    ],
+    "edges": [
+      { "from": "vendor", "to": "pos_vendor",         "type": "ASSERTED",       "provenance": "turn:1" },
+      { "from": "buyer",  "to": "pos_buyer",          "type": "ASSERTED",       "provenance": "turn:2" },
+      { "from": "vendor", "to": "int_vendor_quarter", "type": "HOLDS_INTEREST", "provenance": "turn:1" },
+      { "from": "vendor", "to": "int_vendor_expand",  "type": "HOLDS_INTEREST", "provenance": "turn:3" },
+      { "from": "buyer",  "to": "int_buyer_board",    "type": "HOLDS_INTEREST", "provenance": "turn:4" },
+      { "from": "buyer",  "to": "int_buyer_internal", "type": "HOLDS_INTEREST", "provenance": "turn:2" }
+    ]
+  },
+  "rubric": {
+    "scoring": "llm_judge_anchored",
+    "llm_judge_anchored_target": 0.70
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "id": "tcgc-0002",
+  "task_type": "event-ordering",
+  "domain": "peace-process",
+  "license": "CC-BY-NC-SA-4.0",
+  "source": {
+    "collection": "v0.1-sample",
+    "collected_on": "2026-03-14",
+    "annotators": ["A1","A3"],
+    "inter_annotator_kappa": 0.91
+  },
+  "inputs": {
+    "dates_stripped": true,
+    "documents": [
+      { "id": "doc1", "title": "Track-II summary memo", "kind": "memo",
+        "text": "The Juba-based delegation returned after the preparatory consultations in Entebbe, though only once the mediation panel had circulated the revised agenda. Earlier still, both principals had met bilaterally on the margins of a regional summit — that encounter is what unblocked the panel's work in the first place. The joint communiqué was issued only after the delegation returned to Juba and briefed the Council." }
+    ],
+    "question": "Reconstruct the chronological order of the five events mentioned (e1..e5) from earliest to latest. Dates have been stripped from the source."
+  },
+  "gold": {
+    "primitives": [
+      { "id": "e1", "type": "event", "label": "bilateral principals meeting at regional summit", "provenance": "doc1" },
+      { "id": "e2", "type": "event", "label": "mediation panel circulates revised agenda",      "provenance": "doc1" },
+      { "id": "e3", "type": "event", "label": "preparatory consultations in Entebbe",           "provenance": "doc1" },
+      { "id": "e4", "type": "event", "label": "Juba-based delegation returns",                  "provenance": "doc1" },
+      { "id": "e5", "type": "event", "label": "joint communiqué issued",                         "provenance": "doc1" }
+    ],
+    "edges": [
+      { "from": "e1", "to": "e2", "type": "PRECEDES", "provenance": "doc1" },
+      { "from": "e2", "to": "e3", "type": "PRECEDES", "provenance": "doc1" },
+      { "from": "e3", "to": "e4", "type": "PRECEDES", "provenance": "doc1" },
+      { "from": "e4", "to": "e5", "type": "PRECEDES", "provenance": "doc1" }
+    ],
+    "order": ["e1","e2","e3","e4","e5"]
+  },
+  "rubric": {
+    "scoring": "kendall_tau",
+    "kendall_tau_target": 0.80
+  }
+}

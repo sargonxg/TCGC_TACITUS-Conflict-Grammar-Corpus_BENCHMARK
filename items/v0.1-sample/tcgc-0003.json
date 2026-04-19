@@ -1,0 +1,43 @@
+{
+  "id": "tcgc-0003",
+  "task_type": "contradiction-detection",
+  "domain": "governance",
+  "license": "CC-BY-NC-SA-4.0",
+  "source": {
+    "collection": "v0.1-sample",
+    "collected_on": "2026-03-14",
+    "annotators": ["A2","A4"],
+    "inter_annotator_kappa": 0.76
+  },
+  "inputs": {
+    "documents": [
+      { "id": "bd-minutes-q1", "title": "Board minutes, Q1", "kind": "minutes", "date": "2025-03-18",
+        "text": "The Chair opened by confirming that the strategic pivot toward commercial customers had been approved unanimously at the October retreat. Director Park observed that the retreat had produced no formal resolution on customer segment." },
+      { "id": "bd-minutes-q2", "title": "Board minutes, Q2", "kind": "minutes", "date": "2025-06-12",
+        "text": "The Chair reported that Q1 results were ahead of plan. Director Ito noted the agenda would be distributed 72 hours in advance, consistent with the new governance protocol; Director Park noted that she had received the pack the morning of." }
+    ],
+    "question": "Identify contradicting claims across the two sets of minutes. Flag which are material and which are cosmetic."
+  },
+  "gold": {
+    "primitives": [
+      { "id": "c1", "type": "claim", "label": "strategic pivot approved unanimously at October retreat",   "provenance": "bd-minutes-q1" },
+      { "id": "c2", "type": "claim", "label": "retreat produced no formal resolution on customer segment","provenance": "bd-minutes-q1" },
+      { "id": "c3", "type": "claim", "label": "agenda distributed 72 hours in advance",                   "provenance": "bd-minutes-q2" },
+      { "id": "c4", "type": "claim", "label": "pack received the morning of",                             "provenance": "bd-minutes-q2" }
+    ],
+    "edges": [
+      { "from": "c1", "to": "c2", "type": "CONTRADICTS", "provenance": "bd-minutes-q1" },
+      { "from": "c3", "to": "c4", "type": "CONTRADICTS", "provenance": "bd-minutes-q2" }
+    ],
+    "contradictions": [
+      { "claim_a": "c1", "claim_b": "c2", "materiality": "material",
+        "rationale": "Disagreement about whether a strategic decision was made bears directly on the board's authority and on downstream commitments." },
+      { "claim_a": "c3", "claim_b": "c4", "materiality": "cosmetic",
+        "rationale": "Procedural timing disagreement that does not affect the substance of decisions." }
+    ]
+  },
+  "rubric": {
+    "scoring": "contradiction_pair_f1",
+    "contradiction_pair_f1_target": 0.85
+  }
+}

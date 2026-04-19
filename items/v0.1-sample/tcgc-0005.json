@@ -1,0 +1,43 @@
+{
+  "id": "tcgc-0005",
+  "task_type": "provenance-attribution",
+  "domain": "diplomatic",
+  "license": "CC-BY-NC-SA-4.0",
+  "source": {
+    "collection": "v0.1-sample",
+    "collected_on": "2026-03-14",
+    "annotators": ["A2","A4"],
+    "inter_annotator_kappa": 0.88
+  },
+  "inputs": {
+    "documents": [
+      { "id": "press-briefing", "title": "Press briefing, Foreign Ministry of State A",
+        "kind": "briefing", "date": "2026-02-03",
+        "text": "The Spokesperson reiterated that State A will not accept any unilateral demarcation of the maritime boundary. A question on whether consultations with State B had resumed was declined. The Spokesperson added that cooperation with State C on fisheries remains \"unaffected by recent tensions\"." },
+      { "id": "mfa-cable", "title": "Cable, Mission of State B",
+        "kind": "cable", "date": "2026-02-05",
+        "text": "State B's Deputy Permanent Representative stated in the corridor that \"technical contacts have continued throughout\" and characterized State A's posture as \"rhetorical\". The DPR declined to confirm a date for the next political-level meeting." }
+    ],
+    "question": "Extract every attributable claim in these two documents and bind it to its exact source span."
+  },
+  "gold": {
+    "primitives": [
+      { "id": "state-a-mfa", "type": "actor", "label": "State A Foreign Ministry Spokesperson", "provenance": "press-briefing" },
+      { "id": "state-b-dpr", "type": "actor", "label": "State B Deputy Permanent Representative", "provenance": "mfa-cable" },
+      { "id": "c1", "type": "claim", "label": "State A will not accept unilateral demarcation of the maritime boundary", "provenance": "press-briefing:spans:1" },
+      { "id": "c2", "type": "claim", "label": "cooperation with State C on fisheries remains unaffected by recent tensions", "provenance": "press-briefing:spans:2" },
+      { "id": "c3", "type": "claim", "label": "technical contacts have continued throughout", "provenance": "mfa-cable:spans:1" },
+      { "id": "c4", "type": "claim", "label": "State A's posture characterized as rhetorical", "provenance": "mfa-cable:spans:2" }
+    ],
+    "edges": [
+      { "from": "state-a-mfa", "to": "c1", "type": "ASSERTED", "provenance": "press-briefing:spans:1" },
+      { "from": "state-a-mfa", "to": "c2", "type": "ASSERTED", "provenance": "press-briefing:spans:2" },
+      { "from": "state-b-dpr", "to": "c3", "type": "ASSERTED", "provenance": "mfa-cable:spans:1" },
+      { "from": "state-b-dpr", "to": "c4", "type": "ASSERTED", "provenance": "mfa-cable:spans:2" }
+    ]
+  },
+  "rubric": {
+    "scoring": "provenance_f1",
+    "provenance_f1_target": 0.95
+  }
+}

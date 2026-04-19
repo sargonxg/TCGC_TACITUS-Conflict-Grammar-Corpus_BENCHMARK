@@ -1,0 +1,46 @@
+{
+  "id": "tcgc-0001",
+  "task_type": "commitment-tracking",
+  "domain": "workplace",
+  "license": "CC-BY-NC-SA-4.0",
+  "source": {
+    "collection": "v0.1-sample",
+    "collected_on": "2026-03-14",
+    "annotators": ["A1", "A2"],
+    "inter_annotator_kappa": 0.82
+  },
+  "inputs": {
+    "messages": [
+      { "id": "msg1", "day": 1, "time": "Mon 09:14", "from": "Sam",
+        "text": "So we're agreed — you own the Q4 launch deck content, I handle design. Lock it in by Thursday?" },
+      { "id": "msg2", "day": 1, "time": "Mon 09:47", "from": "Alex",
+        "text": "Sounds good. I'll pick it up after the Jenkins pitch." },
+      { "id": "msg3", "day": 4, "time": "Thu 09:02", "from": "Alex",
+        "text": "I never said I'd own it. Just help." }
+    ],
+    "question": "Was there a commitment on content ownership, when was it made, and who asserted it?"
+  },
+  "gold": {
+    "commitment_id": "cm1",
+    "subject": "Q4 launch deck content",
+    "deadline": "Thursday",
+    "status": "contested",
+    "primitives": [
+      { "id": "Sam",  "type": "actor", "label": "Sam",  "provenance": "msg1" },
+      { "id": "Alex", "type": "actor", "label": "Alex", "provenance": "msg2" },
+      { "id": "cm1", "type": "commitment",
+        "subject": "Q4 launch deck content", "deadline": "Thursday", "status": "contested",
+        "provenance": ["msg1","msg2","msg3"] }
+    ],
+    "edges": [
+      { "from": "Sam",  "to": "cm1", "type": "ASSERTED",                 "provenance": "msg1" },
+      { "from": "Alex", "to": "cm1", "type": "ACKNOWLEDGED_AMBIGUOUSLY", "provenance": "msg2" },
+      { "from": "Alex", "to": "cm1", "type": "DENIES_SCOPE",             "provenance": "msg3" }
+    ]
+  },
+  "rubric": {
+    "scoring": "graph_overlap",
+    "graph_overlap_target": 0.85,
+    "provenance_f1_target": 1.0
+  }
+}
