@@ -1,0 +1,176 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://tacitus.me/research/tcgc/schema/tcgc-v0.1.json",
+  "title": "TACITUS Conflict Grammar Corpus item — v0.1",
+  "description": "Schema for a single TCGC benchmark item. See https://www.tacitus.me/research/tcgc.",
+  "type": "object",
+  "required": ["id", "task_type", "domain", "inputs", "gold", "rubric"],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^tcgc-\\d{4}$"
+    },
+    "task_type": {
+      "type": "string",
+      "enum": [
+        "actor-resolution", "claim-extraction", "interest-extraction",
+        "constraint-extraction", "leverage-mapping", "commitment-tracking",
+        "event-ordering", "narrative-drift", "causal-chain",
+        "contradiction-detection", "provenance-attribution",
+        "commitment-claim-mismatch", "position-interest-separation",
+        "cross-document-synthesis"
+      ]
+    },
+    "domain": {
+      "type": "string",
+      "enum": ["workplace","commercial","governance","peace-process","policy","family","diplomatic"]
+    },
+    "license": { "type": "string" },
+    "source": {
+      "type": "object",
+      "properties": {
+        "collection": { "type": "string" },
+        "collected_on": { "type": "string", "format": "date" },
+        "annotators": { "type": "array", "items": { "type": "string" } },
+        "inter_annotator_kappa": { "type": "number", "minimum": -1, "maximum": 1 }
+      },
+      "additionalProperties": false
+    },
+    "inputs": {
+      "type": "object",
+      "required": ["question"],
+      "additionalProperties": false,
+      "anyOf": [
+        { "required": ["messages"] },
+        { "required": ["documents"] },
+        { "required": ["transcript"] }
+      ],
+      "properties": {
+        "messages": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["from", "text"],
+            "additionalProperties": false,
+            "properties": {
+              "id": {"type":"string"}, "day":{"type":"integer","minimum":0},
+              "time":{"type":"string"}, "date":{"type":"string","format":"date"},
+              "from":{"type":"string"}, "to":{"type":"string"}, "text":{"type":"string"}
+            }
+          }
+        },
+        "documents": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["id", "text"],
+            "additionalProperties": false,
+            "properties": {
+              "id":{"type":"string"}, "title":{"type":"string"}, "kind":{"type":"string"},
+              "date":{"type":"string","format":"date"}, "author":{"type":"string"}, "text":{"type":"string"}
+            }
+          }
+        },
+        "transcript": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["speaker", "text"],
+            "additionalProperties": false,
+            "properties": {
+              "turn":{"type":"integer","minimum":0}, "speaker":{"type":"string"},
+              "time":{"type":"string"}, "text":{"type":"string"}
+            }
+          }
+        },
+        "actors": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["id", "label"],
+            "additionalProperties": false,
+            "properties": {
+              "id":{"type":"string"}, "label":{"type":"string"},
+              "aliases":{"type":"array","items":{"type":"string"}}
+            }
+          }
+        },
+        "question": { "type": "string" },
+        "dates_stripped": { "type": "boolean" }
+      }
+    },
+    "gold": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "primitives": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["id", "type"],
+            "additionalProperties": true,
+            "properties": {
+              "id":{"type":"string"},
+              "type":{"type":"string","enum":["actor","claim","interest","constraint","leverage","commitment","event","narrative"]},
+              "label":{"type":"string"}, "subject":{"type":"string"}, "deadline":{"type":"string"},
+              "status":{"type":"string"}, "materiality":{"type":"string","enum":["material","cosmetic"]},
+              "provenance":{"type":["string","array"],"items":{"type":"string"}},
+              "attributes":{"type":"object","additionalProperties":true}
+            }
+          }
+        },
+        "edges": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["from", "to", "type", "provenance"],
+            "additionalProperties": false,
+            "properties": {
+              "from":{"type":"string"}, "to":{"type":"string"},
+              "type":{"type":"string","enum":[
+                "ASSERTED","DENIED","ACKNOWLEDGED","ACKNOWLEDGED_AMBIGUOUSLY",
+                "DENIES_SCOPE","COMMITS_TO","REVOKES","BLOCKS","ENABLES",
+                "CAUSES","PRECEDES","CONTRADICTS","SUPPORTS","CITES",
+                "HOLDS_INTEREST","FRAMES","LEVERAGES","CONSTRAINED_BY"
+              ]},
+              "provenance":{"type":["string","array"],"items":{"type":"string"}},
+              "attributes":{"type":"object","additionalProperties":true}
+            }
+          }
+        },
+        "order": { "type": "array", "items": {"type":"string"} },
+        "contradictions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["claim_a","claim_b","materiality"],
+            "additionalProperties": false,
+            "properties": {
+              "claim_a":{"type":"string"}, "claim_b":{"type":"string"},
+              "materiality":{"type":"string","enum":["material","cosmetic"]},
+              "rationale":{"type":"string"}
+            }
+          }
+        },
+        "commitment_id":{"type":"string"}, "subject":{"type":"string"},
+        "deadline":{"type":"string"}, "status":{"type":"string"}
+      }
+    },
+    "rubric": {
+      "type": "object",
+      "required": ["scoring"],
+      "additionalProperties": false,
+      "properties": {
+        "scoring":{"type":"string","enum":["graph_overlap","provenance_f1","kendall_tau","contradiction_pair_f1","llm_judge_anchored"]},
+        "graph_overlap_target":{"type":"number","minimum":0,"maximum":1},
+        "provenance_f1_target":{"type":"number","minimum":0,"maximum":1},
+        "kendall_tau_target":{"type":"number","minimum":0,"maximum":1},
+        "contradiction_pair_f1_target":{"type":"number","minimum":0,"maximum":1},
+        "llm_judge_anchored_target":{"type":"number","minimum":0,"maximum":1},
+        "node_weight":{"type":"number","minimum":0,"maximum":1,"default":0.4},
+        "edge_weight":{"type":"number","minimum":0,"maximum":1,"default":0.6}
+      }
+    }
+  }
+}
