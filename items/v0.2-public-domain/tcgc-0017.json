@@ -1,0 +1,58 @@
+{
+  "id": "tcgc-0017",
+  "task_type": "leverage-mapping",
+  "domain": "diplomatic",
+  "license": "CC-BY-NC-SA-4.0",
+  "source": {
+    "collection": "v0.2-public-domain",
+    "collected_on": "2026-05-13",
+    "annotators": ["A2","A4"],
+    "inter_annotator_kappa": 0.74
+  },
+  "inputs": {
+    "documents": [
+      {
+        "id": "cop-statement",
+        "title": "Multilateral climate finance statement (synthetic)",
+        "kind": "communique",
+        "date": "2026-04-18",
+        "text": "The Group of Industrialised Donors reiterates its annual commitment of USD 100 billion in climate finance to the Group of Vulnerable States, subject to the donors' parliamentary appropriation cycles. The Vulnerable States, while welcoming the reiteration, note that delivery has consistently fallen short of pledged amounts and that adaptation funding remains under-prioritised relative to mitigation finance. The negotiation also produced agreement on a new Loss and Damage Facility, the operational modalities of which remain to be finalised."
+      },
+      {
+        "id": "vs-press-conference",
+        "title": "Vulnerable States bloc press conference (synthetic)",
+        "kind": "press-conference",
+        "date": "2026-04-19",
+        "text": "We have technical control of the negotiation text on adaptation indicators and we will not move forward on the Loss and Damage operational modalities until adaptation funding ratios are guaranteed in writing. The donors hold the chequebook; we hold the agenda."
+      }
+    ],
+    "question": "Map the leverage relations across the donor bloc and the vulnerable-states bloc. Identify the procedural mechanisms each side holds, the resource asymmetries, and the conditional commitment the Vulnerable States introduce in the press conference."
+  },
+  "gold": {
+    "primitives": [
+      { "id": "donors",   "type": "actor", "label": "Group of Industrialised Donors",   "provenance": "cop-statement" },
+      { "id": "vulnerable", "type": "actor", "label": "Group of Vulnerable States",     "provenance": "cop-statement" },
+      { "id": "lev-resource", "type": "leverage", "label": "Resource: USD 100bn pledge subject to appropriation",  "provenance": "cop-statement" },
+      { "id": "lev-procedural","type": "leverage", "label": "Procedural: technical control of adaptation negotiation text", "provenance": "vs-press-conference" },
+      { "id": "lev-information","type":"leverage","label": "Information: agenda control on Loss & Damage modalities", "provenance": "vs-press-conference" },
+      { "id": "cm-100bn",    "type": "commitment", "label": "USD 100bn annual climate finance (with appropriation caveat)", "status": "active", "provenance": "cop-statement" },
+      { "id": "cm-condition","type":"commitment","label":"Vulnerable States withhold L&D modalities until adaptation ratios guaranteed in writing","status":"active","provenance":"vs-press-conference" },
+      { "id": "constraint-approps", "type": "constraint", "label": "Donors' parliamentary appropriation cycles", "provenance": "cop-statement" },
+      { "id": "claim-shortfall", "type": "claim", "label": "Delivery has consistently fallen short of pledged amounts", "provenance": "cop-statement" }
+    ],
+    "edges": [
+      { "from": "donors",     "to": "lev-resource",    "type": "LEVERAGES", "provenance": "cop-statement" },
+      { "from": "vulnerable", "to": "lev-procedural",  "type": "LEVERAGES", "provenance": "vs-press-conference" },
+      { "from": "vulnerable", "to": "lev-information", "type": "LEVERAGES", "provenance": "vs-press-conference" },
+      { "from": "donors",     "to": "cm-100bn",        "type": "COMMITS_TO","provenance": "cop-statement" },
+      { "from": "vulnerable", "to": "cm-condition",    "type": "COMMITS_TO","provenance": "vs-press-conference" },
+      { "from": "cm-100bn",   "to": "constraint-approps", "type": "CONSTRAINED_BY", "provenance": "cop-statement" },
+      { "from": "vulnerable", "to": "claim-shortfall", "type": "ASSERTED",  "provenance": "cop-statement" }
+    ]
+  },
+  "rubric": {
+    "scoring": "graph_overlap",
+    "graph_overlap_target": 0.80,
+    "provenance_f1_target": 0.92
+  }
+}
