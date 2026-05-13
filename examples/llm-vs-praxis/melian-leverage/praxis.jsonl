@@ -1,0 +1,18 @@
+{"op":"CREATE","node":{"id":"athens","type":"actor","label":"Athenian envoys","provenance":"melian-opening:spans:1"}}
+{"op":"CREATE","node":{"id":"melians","type":"actor","label":"Melian council","provenance":"melian-opening:spans:2"}}
+{"op":"CREATE","node":{"id":"lev-coercive","type":"leverage","label":"Coercive military superiority","mechanism":"Coercive","magnitude":"overwhelming","provenance":"melian-opening:spans:1"}}
+{"op":"CREATE","node":{"id":"lev-normative","type":"leverage","label":"Appeal to common law of nations as protective norm","mechanism":"Normative","magnitude":"contested","provenance":"melian-opening:spans:2"}}
+{"op":"CREATE","node":{"id":"constraint-proc","type":"constraint","label":"Procedural: 'right' and 'fairness' barred from admissible argument","kind":"Procedural","binding_strength":"Hard","provenance":"melian-opening:spans:1"}}
+{"op":"CREATE","node":{"id":"claim-realism","type":"claim","modality":"Asserted","label":"The strong do what they can and the weak suffer what they must","provenance":"melian-opening:spans:1"}}
+{"op":"CREATE","node":{"id":"claim-common-protection","type":"claim","modality":"Asserted","label":"Common protection of fair-and-right arguments is itself a shared interest","provenance":"melian-opening:spans:2"}}
+{"op":"CREATE","node":{"id":"int-athens-empire","type":"interest","label":"Stability of Athenian imperial control","derivation":["claim-realism","lev-coercive"],"confidence":"high","provenance":"melian-opening:spans:1"}}
+{"op":"CREATE","node":{"id":"int-melos-survival","type":"interest","label":"Survival of the Melian polity","derivation":["claim-common-protection"],"confidence":"high","provenance":"melian-opening:spans:2"}}
+{"op":"CREATE","edge":{"from":"athens","to":"lev-coercive","type":"LEVERAGES","provenance":"melian-opening:spans:1"}}
+{"op":"CREATE","edge":{"from":"melians","to":"lev-normative","type":"LEVERAGES","provenance":"melian-opening:spans:2"}}
+{"op":"CREATE","edge":{"from":"athens","to":"constraint-proc","type":"CONSTRAINED_BY","provenance":"melian-opening:spans:1"}}
+{"op":"CREATE","edge":{"from":"melians","to":"constraint-proc","type":"CONSTRAINED_BY","provenance":"melian-opening:spans:1"}}
+{"op":"CREATE","edge":{"from":"athens","to":"claim-realism","type":"ASSERTED","provenance":"melian-opening:spans:1"}}
+{"op":"CREATE","edge":{"from":"melians","to":"claim-common-protection","type":"ASSERTED","provenance":"melian-opening:spans:2"}}
+{"op":"CREATE","edge":{"from":"athens","to":"int-athens-empire","type":"HOLDS_INTEREST","provenance":"melian-opening:spans:1"}}
+{"op":"CREATE","edge":{"from":"melians","to":"int-melos-survival","type":"HOLDS_INTEREST","provenance":"melian-opening:spans:2"}}
+{"op":"CREATE","edge":{"from":"claim-common-protection","to":"constraint-proc","type":"CONTRADICTS","provenance":"melian-opening:spans:2","attributes":{"materiality":"material","rationale":"The Melian claim re-introduces the very category Athens has just barred from the negotiation."}}}

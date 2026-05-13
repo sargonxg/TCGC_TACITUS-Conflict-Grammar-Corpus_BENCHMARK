@@ -1,0 +1,50 @@
+{
+  "id": "tcgc-0011",
+  "task_type": "position-interest-separation",
+  "domain": "policy",
+  "license": "CC-BY-NC-SA-4.0",
+  "source": {
+    "collection": "v0.2-public-domain",
+    "collected_on": "2026-05-13",
+    "annotators": ["A2","A3"],
+    "inter_annotator_kappa": 0.71
+  },
+  "inputs": {
+    "documents": [
+      {
+        "id": "federalist-10",
+        "title": "Federalist No. 10 (Madison, 1787)",
+        "kind": "essay",
+        "date": "1787-11-22",
+        "author": "James Madison",
+        "text": "But the most common and durable source of factions has been the various and unequal distribution of property. Those who hold and those who are without property have ever formed distinct interests in society. Those who are creditors, and those who are debtors, fall under a like discrimination. A landed interest, a manufacturing interest, a mercantile interest, a moneyed interest, with many lesser interests, grow up of necessity in civilized nations, and divide them into different classes, actuated by different sentiments and views. The regulation of these various and interfering interests forms the principal task of modern legislation, and involves the spirit of party and faction in the necessary and ordinary operations of the government.\n\nIt is in vain to say that enlightened statesmen will be able to adjust these clashing interests, and render them all subservient to the public good. Enlightened statesmen will not always be at the helm."
+      }
+    ],
+    "question": "Separate Madison's stated position from the underlying interests he assigns to social classes. Distinguish interests Madison treats as structurally permanent from those he treats as contingent. Note where his position depends on a specific constraint on enlightened-statesman supply."
+  },
+  "gold": {
+    "primitives": [
+      { "id": "madison", "type": "actor", "label": "James Madison (author)", "provenance": "federalist-10:spans:1" },
+      { "id": "creditors", "type": "actor", "label": "Creditor class", "provenance": "federalist-10:spans:1" },
+      { "id": "debtors",   "type": "actor", "label": "Debtor class",   "provenance": "federalist-10:spans:1" },
+      { "id": "propertied",    "type": "actor", "label": "Propertied class",    "provenance": "federalist-10:spans:1" },
+      { "id": "unpropertied",  "type": "actor", "label": "Unpropertied class",  "provenance": "federalist-10:spans:1" },
+      { "id": "pos-madison", "type": "claim", "label": "Position: regulation of clashing interests is the principal legislative task", "provenance": "federalist-10:spans:1" },
+      { "id": "int-property-protection", "type": "interest", "label": "Protection of unequal property distribution", "provenance": "federalist-10:spans:1" },
+      { "id": "int-property-acquisition", "type": "interest", "label": "Redistribution / acquisition of property", "provenance": "federalist-10:spans:1" },
+      { "id": "constraint-statesman", "type": "constraint", "label": "Enlightened statesmen are not always available", "provenance": "federalist-10:spans:2" }
+    ],
+    "edges": [
+      { "from": "madison",      "to": "pos-madison",              "type": "ASSERTED",       "provenance": "federalist-10:spans:1" },
+      { "from": "propertied",   "to": "int-property-protection",  "type": "HOLDS_INTEREST", "provenance": "federalist-10:spans:1" },
+      { "from": "unpropertied", "to": "int-property-acquisition", "type": "HOLDS_INTEREST", "provenance": "federalist-10:spans:1" },
+      { "from": "creditors",    "to": "int-property-protection",  "type": "HOLDS_INTEREST", "provenance": "federalist-10:spans:1" },
+      { "from": "debtors",      "to": "int-property-acquisition", "type": "HOLDS_INTEREST", "provenance": "federalist-10:spans:1" },
+      { "from": "pos-madison",  "to": "constraint-statesman",     "type": "CONSTRAINED_BY", "provenance": "federalist-10:spans:2" }
+    ]
+  },
+  "rubric": {
+    "scoring": "llm_judge_anchored",
+    "llm_judge_anchored_target": 0.72
+  }
+}

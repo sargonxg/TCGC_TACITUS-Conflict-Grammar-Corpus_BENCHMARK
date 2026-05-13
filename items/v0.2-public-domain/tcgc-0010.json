@@ -1,0 +1,52 @@
+{
+  "id": "tcgc-0010",
+  "task_type": "leverage-mapping",
+  "domain": "diplomatic",
+  "license": "CC-BY-NC-SA-4.0",
+  "source": {
+    "collection": "v0.2-public-domain",
+    "collected_on": "2026-05-13",
+    "annotators": ["A1","A2"],
+    "inter_annotator_kappa": 0.84
+  },
+  "inputs": {
+    "documents": [
+      {
+        "id": "melian-opening",
+        "title": "Melian Dialogue (Thucydides V.85–89, Crawley translation)",
+        "kind": "historical-dialogue",
+        "date": "0416-01-01",
+        "text": "ATHENIANS. Then we on our side will use no fine phrases saying, either that we have a right to our empire because we overthrew the Mede, or that we are now attacking you because of wrong that you have done us, and make a long speech which would not be believed; and in return we hope that you, instead of thinking to influence us by saying that you did not join the Lacedaemonians, although their colonists, or that you have done us no wrong, will aim at what is feasible, holding in view the real sentiments of us both; since you know as well as we do that right, as the world goes, is only in question between equals in power, while the strong do what they can and the weak suffer what they must.\n\nMELIANS. As we think, at any rate, it is expedient — we speak as we are obliged, since you enjoin us to let right alone and talk only of interest — that you should not destroy what is our common protection, the privilege of being allowed in danger to invoke what is fair and right, and even to profit by arguments not strictly valid if they can be got to pass current."
+      }
+    ],
+    "question": "Map the leverage relations between Athens and Melos in this passage. Identify the procedural constraint Athens imposes on the negotiation. Note where each party's position-shaped claim implies an underlying interest."
+  },
+  "gold": {
+    "primitives": [
+      { "id": "athens",   "type": "actor", "label": "Athenian envoys",  "provenance": "melian-opening:spans:1" },
+      { "id": "melians",  "type": "actor", "label": "Melian council",   "provenance": "melian-opening:spans:2" },
+      { "id": "lev-coercive", "type": "leverage", "label": "Coercive military superiority", "provenance": "melian-opening:spans:1" },
+      { "id": "lev-normative", "type": "leverage", "label": "Appeal to common law of nations as protective norm", "provenance": "melian-opening:spans:2" },
+      { "id": "constraint-proc", "type": "constraint", "label": "Procedural: 'right' and 'fairness' barred from admissible argument", "provenance": "melian-opening:spans:1" },
+      { "id": "claim-realism", "type": "claim", "label": "The strong do what they can and the weak suffer what they must", "provenance": "melian-opening:spans:1" },
+      { "id": "claim-common-protection", "type": "claim", "label": "Common protection of fair-and-right arguments is itself a shared interest", "provenance": "melian-opening:spans:2" },
+      { "id": "int-athens-empire", "type": "interest", "label": "Stability of Athenian imperial control", "provenance": "melian-opening:spans:1" },
+      { "id": "int-melos-survival", "type": "interest", "label": "Survival of the Melian polity", "provenance": "melian-opening:spans:2" }
+    ],
+    "edges": [
+      { "from": "athens",  "to": "lev-coercive",     "type": "LEVERAGES",       "provenance": "melian-opening:spans:1" },
+      { "from": "melians", "to": "lev-normative",    "type": "LEVERAGES",       "provenance": "melian-opening:spans:2" },
+      { "from": "athens",  "to": "constraint-proc",  "type": "CONSTRAINED_BY",  "provenance": "melian-opening:spans:1" },
+      { "from": "melians", "to": "constraint-proc",  "type": "CONSTRAINED_BY",  "provenance": "melian-opening:spans:1" },
+      { "from": "athens",  "to": "claim-realism",          "type": "ASSERTED",       "provenance": "melian-opening:spans:1" },
+      { "from": "melians", "to": "claim-common-protection","type": "ASSERTED",       "provenance": "melian-opening:spans:2" },
+      { "from": "athens",  "to": "int-athens-empire",      "type": "HOLDS_INTEREST", "provenance": "melian-opening:spans:1" },
+      { "from": "melians", "to": "int-melos-survival",     "type": "HOLDS_INTEREST", "provenance": "melian-opening:spans:2" }
+    ]
+  },
+  "rubric": {
+    "scoring": "graph_overlap",
+    "graph_overlap_target": 0.78,
+    "provenance_f1_target": 0.92
+  }
+}

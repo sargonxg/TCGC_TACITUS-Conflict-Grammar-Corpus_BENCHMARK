@@ -1,0 +1,40 @@
+{
+  "id": "the-prince",
+  "title": "The Prince",
+  "author": "Niccolò Machiavelli",
+  "translator": "W. K. Marriott",
+  "license": "Public Domain",
+  "source": {
+    "kind": "gutenberg",
+    "url": "https://www.gutenberg.org/cache/epub/1232/pg1232.txt",
+    "edition": "Project Gutenberg EBook #1232 (Marriott translation)",
+    "retrieved": "2026-05-13"
+  },
+  "anchors": [
+    {
+      "id": "prince-cesare-borgia",
+      "section": "Chapter VII — Concerning New Principalities Acquired Either by the Arms of Others or by Good Fortune",
+      "primitives_dense": ["actor", "event", "commitment", "leverage", "narrative"],
+      "task_types": ["actor-resolution", "event-ordering", "leverage-mapping", "causal-chain", "narrative-drift"],
+      "question": "Machiavelli walks through Cesare Borgia's rise and fall as a worked example. Reconstruct the causal chain: which leverage moves did Borgia execute, in what order, against which actors? Identify the commitment Machiavelli implicitly endorses as good statecraft versus the one he flags as the breaking point.",
+      "expected_subgraph_summary": "Sequence of events with PRECEDES + selective CAUSES edges; Borgia as central actor; Remirro de Orco execution as a typed event with a deliberate narrative frame (justice display); the papal-succession constraint as the structural cause of Borgia's downfall."
+    },
+    {
+      "id": "prince-virtu-fortuna",
+      "section": "Chapter XXV — What Fortune Can Effect in Human Affairs",
+      "primitives_dense": ["claim", "narrative", "constraint"],
+      "task_types": ["claim-extraction", "narrative-drift", "constraint-extraction"],
+      "question": "Machiavelli's claim about fortune and human action is famously ambiguous. Extract the typed claims; identify the narrative frame; surface the implicit constraint on what counts as 'virtù' in his framework.",
+      "expected_subgraph_summary": "Two competing narrative frames (fortune-as-flood vs fortune-as-woman); constraint on virtù as conditional on temperament-match-with-times; claim modalities mixed (descriptive + prescriptive)."
+    },
+    {
+      "id": "prince-lions-and-foxes",
+      "section": "Chapter XVIII — Concerning the Way in Which Princes Should Keep Faith",
+      "primitives_dense": ["commitment", "claim", "narrative"],
+      "task_types": ["commitment-tracking", "commitment-claim-mismatch", "narrative-drift"],
+      "question": "Machiavelli explicitly recommends commitment-breach under conditions. Map the typed structure: which commitments may be broken, under which conditions, with what justification? How does this Commitment-modality differ from Hobbes' covenant in `leviathan.json`?",
+      "expected_subgraph_summary": "Conditional commitment-breach with explicit triggering conditions (changed circumstances, breach by counterparty); fox-and-lion narrative as a leverage-typing frame; cross-corpus contradiction edge to Hobbes' binding-covenant claim."
+    }
+  ],
+  "notes": "Marriott 1908 translation, public domain. The Prince is a worked exercise in typed conflict primitives — actor, leverage, commitment, narrative — and the cross-corpus comparison with Leviathan is one of the strongest narrative-drift signals in the public-domain corpus."
+}

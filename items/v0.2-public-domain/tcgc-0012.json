@@ -1,0 +1,57 @@
+{
+  "id": "tcgc-0012",
+  "task_type": "narrative-drift",
+  "domain": "governance",
+  "license": "CC-BY-NC-SA-4.0",
+  "source": {
+    "collection": "v0.2-public-domain",
+    "collected_on": "2026-05-13",
+    "annotators": ["A1","A4"],
+    "inter_annotator_kappa": 0.69
+  },
+  "inputs": {
+    "documents": [
+      {
+        "id": "hobbes-sovereign",
+        "title": "Leviathan (Hobbes), Chapter XVII — extract",
+        "kind": "treatise",
+        "date": "1651-01-01",
+        "author": "Thomas Hobbes",
+        "text": "The only way to erect such a Common Power, as may be able to defend them from the invasion of Foreigners, and the injuries of one another, and thereby to secure them in such sort, as that by their owne industrie, and by the fruites of the Earth, they may nourish themselves and live contentedly; is, to conferre all their power and strength upon one Man, or upon one Assembly of men, that may reduce all their Wills, by plurality of voices, unto one Will."
+      },
+      {
+        "id": "machiavelli-prince",
+        "title": "The Prince (Machiavelli), Chapter XVIII — extract",
+        "kind": "treatise",
+        "date": "1532-01-01",
+        "author": "Niccolò Machiavelli",
+        "text": "A prudent ruler ought not to keep faith when by so doing it would be against his interest, and when the reasons which made him bind himself no longer exist. If men were entirely good this precept would not hold, but because they are bad, and will not keep faith with you, you too are not bound to observe it with them."
+      }
+    ],
+    "question": "Both texts describe the same primitive — the sovereign/prince — but frame the foundation of legitimacy differently. Identify the narrative drift across the two framers. Surface the contradiction in the commitment-binding modality. Each framing should be a Narrative primitive in its own right."
+  },
+  "gold": {
+    "primitives": [
+      { "id": "hobbes",      "type": "actor", "label": "Thomas Hobbes (author)",        "provenance": "hobbes-sovereign:spans:1" },
+      { "id": "machiavelli", "type": "actor", "label": "Niccolò Machiavelli (author)",  "provenance": "machiavelli-prince:spans:1" },
+      { "id": "sovereign",   "type": "actor", "label": "The sovereign / prince (subject primitive)", "provenance": "hobbes-sovereign:spans:1" },
+      { "id": "frame-covenant", "type": "narrative", "label": "Sovereign as covenant-receiver; binding force = transferred natural right", "provenance": "hobbes-sovereign:spans:1" },
+      { "id": "frame-pragmatic", "type": "narrative", "label": "Prince as virtù-actor; commitment-binding is conditional on circumstance", "provenance": "machiavelli-prince:spans:1" },
+      { "id": "claim-hobbes-binding", "type": "claim", "label": "Sovereignty is constituted by an act of conferral and is therefore binding", "provenance": "hobbes-sovereign:spans:1" },
+      { "id": "claim-mach-conditional", "type": "claim", "label": "Faith may be broken when the reasons that bound the prince no longer hold", "provenance": "machiavelli-prince:spans:1" }
+    ],
+    "edges": [
+      { "from": "hobbes",      "to": "frame-covenant",    "type": "FRAMES", "provenance": "hobbes-sovereign:spans:1" },
+      { "from": "machiavelli", "to": "frame-pragmatic",   "type": "FRAMES", "provenance": "machiavelli-prince:spans:1" },
+      { "from": "frame-covenant",  "to": "sovereign",     "type": "FRAMES", "provenance": "hobbes-sovereign:spans:1" },
+      { "from": "frame-pragmatic", "to": "sovereign",     "type": "FRAMES", "provenance": "machiavelli-prince:spans:1" },
+      { "from": "hobbes",      "to": "claim-hobbes-binding",    "type": "ASSERTED",     "provenance": "hobbes-sovereign:spans:1" },
+      { "from": "machiavelli", "to": "claim-mach-conditional",  "type": "ASSERTED",     "provenance": "machiavelli-prince:spans:1" },
+      { "from": "claim-mach-conditional", "to": "claim-hobbes-binding", "type": "CONTRADICTS", "provenance": "machiavelli-prince:spans:1" }
+    ]
+  },
+  "rubric": {
+    "scoring": "llm_judge_anchored",
+    "llm_judge_anchored_target": 0.65
+  }
+}

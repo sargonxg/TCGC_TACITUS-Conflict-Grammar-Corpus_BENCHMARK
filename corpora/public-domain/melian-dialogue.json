@@ -1,0 +1,40 @@
+{
+  "id": "melian-dialogue",
+  "title": "History of the Peloponnesian War — The Melian Dialogue (Book V.84–116)",
+  "author": "Thucydides",
+  "translator": "Richard Crawley",
+  "license": "Public Domain",
+  "source": {
+    "kind": "gutenberg",
+    "url": "https://www.gutenberg.org/files/7142/7142-0.txt",
+    "edition": "Project Gutenberg EBook #7142 (Crawley translation)",
+    "retrieved": "2026-05-13"
+  },
+  "anchors": [
+    {
+      "id": "melian-leverage-asymmetry",
+      "section": "Athenian opening (V.85–89)",
+      "primitives_dense": ["actor", "leverage", "claim", "constraint"],
+      "task_types": ["leverage-mapping", "claim-extraction", "position-interest-separation", "constraint-extraction"],
+      "question": "Map the leverage relations between Athens and Melos in the opening exchange. Distinguish positional claims (what each side asserts) from interests (what each side needs). Note where Athens explicitly bars certain kinds of argument from the negotiation — that is a procedural constraint.",
+      "expected_subgraph_summary": "Athenian actor with overwhelming military leverage; Melian actor with leverage candidates limited to moral/divine appeals; a procedural constraint edge from Athens excluding 'right' and 'fairness' as admissible arguments; positions (subjugation vs neutrality) distinct from interests (empire stability vs survival)."
+    },
+    {
+      "id": "melian-ultimatum-commitment",
+      "section": "Athenian closing argument and ultimatum (V.111–113)",
+      "primitives_dense": ["commitment", "leverage", "narrative"],
+      "task_types": ["commitment-tracking", "narrative-drift", "commitment-claim-mismatch"],
+      "question": "The Athenians make a commitment-shaped statement about what will happen if Melos refuses. Is it a Commitment, a Claim, or a Threat in ACO terms? Track how the Melian framing of the same situation drifts from a survival problem to an honour problem across the dialogue.",
+      "expected_subgraph_summary": "Conditional commitment by Athens with explicit triggering condition (refusal) and consequence (subjugation/destruction); Melian narrative-drift chain from prudential to honour-based framing; one contradiction edge between Melian hope-claims and Athenian probability-claims."
+    },
+    {
+      "id": "melian-outcome-event",
+      "section": "Athenian execution and resettlement (V.116)",
+      "primitives_dense": ["event", "commitment", "actor"],
+      "task_types": ["event-ordering", "commitment-tracking", "causal-chain"],
+      "question": "Reconstruct the bi-temporal chain: Melian refusal → siege → fall → Athenian decree of execution → resettlement. Which transitions are claims-about-events vs events themselves? Which Athenian commitment from the dialogue is fulfilled, and which is exceeded?",
+      "expected_subgraph_summary": "Five events with ordered PRECEDES edges; the Athenian conditional commitment status moves Active → Fulfilled with intervening evidence; one note that the resettlement step (kleruchy) was not part of the verbal commitment, so the audit shows scope-creep beyond stated terms."
+    }
+  ],
+  "notes": "Crawley 1874; standard reference translation. Book V Chapters 84–116. The text is short (~6,000 words) and unusually dense in typed primitives — the gold standard for testing leverage extraction and position-vs-interest separation."
+}

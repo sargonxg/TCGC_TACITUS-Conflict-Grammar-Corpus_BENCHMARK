@@ -1,0 +1,52 @@
+{
+  "id": "tcgc-0015",
+  "task_type": "contradiction-detection",
+  "domain": "peace-process",
+  "license": "CC-BY-NC-SA-4.0",
+  "source": {
+    "collection": "v0.2-public-domain",
+    "collected_on": "2026-05-13",
+    "annotators": ["A3","A4"],
+    "inter_annotator_kappa": 0.81
+  },
+  "inputs": {
+    "documents": [
+      {
+        "id": "melian-promise",
+        "title": "Melian Dialogue, Athenian conditional (V.91, Crawley)",
+        "kind": "historical-dialogue",
+        "date": "0416-01-01",
+        "text": "ATHENIANS. We do not propose, in our reply, to use specious phrases — for instance, that, as we have a right to our empire because we overthrew the Mede, or are now attacking you because of wrong that you have done us — and make a long speech which would not be believed. We come not as enemies of any one, but to put an end to your hesitation and to spare you, if possible."
+      },
+      {
+        "id": "melian-outcome",
+        "title": "Melian Dialogue, outcome (V.116, Crawley)",
+        "kind": "historical-narrative",
+        "date": "0415-01-01",
+        "text": "Reinforcements afterwards arriving from Athens, the siege was now pressed vigorously; and some treachery taking place inside, the Melians surrendered at discretion to the Athenians, who put to death all the grown men whom they took, and sold the women and children for slaves, and subsequently sent out five hundred colonists and inhabited the place themselves."
+      }
+    ],
+    "question": "Compare the Athenian conditional commitment ('to spare you, if possible') with the recorded outcome. Identify whether this is a material commitment-claim mismatch or a cosmetic one, and surface the contradiction edge."
+  },
+  "gold": {
+    "primitives": [
+      { "id": "c1", "type": "claim", "label": "Athenian promise to spare Melians if surrender is offered", "provenance": "melian-promise" },
+      { "id": "c2", "type": "claim", "label": "Athenian execution of grown men, enslavement of women and children, settlement of colonists", "provenance": "melian-outcome" }
+    ],
+    "edges": [
+      { "from": "c2", "to": "c1", "type": "CONTRADICTS", "provenance": "melian-outcome" }
+    ],
+    "contradictions": [
+      {
+        "claim_a": "c1",
+        "claim_b": "c2",
+        "materiality": "material",
+        "rationale": "The conditional sparing commitment was not honoured; the outcome materially exceeds and contradicts the verbal commitment-modality. This is the canonical mediator-grade contradiction: an explicit reassuring claim followed by a substantively different action."
+      }
+    ]
+  },
+  "rubric": {
+    "scoring": "contradiction_pair_f1",
+    "contradiction_pair_f1_target": 0.90
+  }
+}
