@@ -69,17 +69,15 @@ That's it. No GPUs required. No paid API calls unless your runner needs them. Th
 
 ---
 
-## Early results — does it actually measure something?
+## Early results — illustrative only, not measured yet
 
-Yes. See [**RESULTS.md**](RESULTS.md) for three honestly-produced reasoning traces (Melian Dialogue, regulatory commitment mismatch, sanctions causal chain) where the **same frontier model** produced (a) a vanilla chat response and (b) a TCGC-style typed output. The vanilla output reads fluently. The typed output is what is actually usable downstream. The gap is structural, not stylistic; it does not close with a larger model.
+[**RESULTS.md**](RESULTS.md) holds three side-by-side comparisons (Melian Dialogue, regulatory commitment mismatch, sanctions causal chain) showing the *target shape* of vanilla-chat output vs the typed-surface output the benchmark would score against. **No model has been run against the harness yet.** The file is intentionally explicit about that: the vanilla paragraphs were hand-written to approximate what a competent chat model would plausibly say; the typed outputs were constructed from the gold subgraphs; and any numbers you read are illustrative, not measured.
 
-A flavour of what those traces surface:
+The benchmark is built to be falsifiable, not asserted. Formal measured results — with the scorer commit SHA, per-task numbers, per-domain numbers, and the prediction JSONL of every system — are what `v0.2` (Q3 2026) is for. The "How we will produce real measured results" section at the end of `RESULTS.md` lists exactly what has to happen first.
 
-- **Causal vs temporal collapse.** Vanilla output uses "which" to bridge an event-pair, hiding whether the relation is `CAUSES` (with mechanism + conditions populated) or merely `PRECEDES`. The validator rejects `CAUSES` without those fields. The discipline forces the model to commit, in writing, to *why* it thinks A caused B.
-- **Commitment / claim conflation.** Vanilla output collapses two distinct commitments into "commitments" plural; the typed output keeps them separate with independent `status` and `valid_time` fields. A compliance dashboard cannot ask "which specific commitment was walked back first?" from prose.
-- **Contradiction averaging.** Vanilla output paraphrases conflicting passages into one. Typed output emits two `Claim` nodes plus a `CONTRADICTS` edge with materiality and rationale.
+Until then the honest statement is the narrow one in §1 of the white paper and the methodology docs: *the typed surface preserves what the prose surface flattens — time, causality, span provenance, contradiction, position vs interest, commitment vs claim. The magnitude of the gap in any given frontier model is an empirical question, not yet answered.*
 
-Formal benchmark scoring with the scorer commit SHA lands in v0.2 (Q3 2026). The traces in `RESULTS.md` are early evidence that what TCGC measures is real and reproducible.
+If you have API keys and want to produce the first real numbers, see the "Reproducing this honestly" section of `RESULTS.md`. The path is short and the result will be the first leaderboard row.
 
 ---
 
