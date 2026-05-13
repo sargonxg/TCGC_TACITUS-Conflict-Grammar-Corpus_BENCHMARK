@@ -77,7 +77,29 @@ The benchmark is built to be falsifiable, not asserted. Formal measured results 
 
 Until then the honest statement is the narrow one in §1 of the white paper and the methodology docs: *the typed surface preserves what the prose surface flattens — time, causality, span provenance, contradiction, position vs interest, commitment vs claim. The magnitude of the gap in any given frontier model is an empirical question, not yet answered.*
 
-If you have API keys and want to produce the first real numbers, see the "Reproducing this honestly" section of `RESULTS.md`. The path is short and the result will be the first leaderboard row.
+---
+
+## Run your own — the `experiments/llm_vs_typed/` harness
+
+A concrete, repeatable harness lives at [`experiments/llm_vs_typed/`](experiments/llm_vs_typed/). It runs the **same model twice on the same item** — once with a vanilla chat prompt, once with the typed ACO contract — and writes per-run records (prompt hash, response hash, elapsed ms, timestamp, model id) plus a side-by-side `REPORT.md`. Provider-agnostic: Anthropic, OpenAI, plus an `echo` no-op client for CI.
+
+```bash
+# Dry run — no API calls.
+make experiment-dry ITEMS=items/v0.2-public-domain/
+
+# Real run with Anthropic.
+export ANTHROPIC_API_KEY=sk-ant-...
+make experiment-anthropic ITEMS=items/v0.2-public-domain/tcgc-0010.json
+
+# Or OpenAI.
+export OPENAI_API_KEY=sk-...
+make experiment-openai
+
+# Produce the side-by-side report.
+make experiment-report RUN=runs/anthropic-claude-opus-4-7-20260513T180000Z
+```
+
+See [`experiments/llm_vs_typed/README.md`](experiments/llm_vs_typed/README.md) for layout, conventions, cost discipline, and the conversion step from typed-mode output to a TCGC `predictions.jsonl` that the benchmark scorer can score. The first contributor to wire a provider and run the sweep produces the first measured leaderboard row.
 
 ---
 
