@@ -1,0 +1,55 @@
+{
+  "id": "tcgc-0018",
+  "task_type": "causal-chain",
+  "domain": "policy",
+  "license": "CC-BY-NC-SA-4.0",
+  "source": {
+    "collection": "v0.2-public-domain",
+    "collected_on": "2026-05-13",
+    "annotators": ["A1","A2"],
+    "inter_annotator_kappa": 0.83
+  },
+  "inputs": {
+    "documents": [
+      {
+        "id": "sanctions-narrative",
+        "title": "Sanctions enforcement narrative (synthetic-policy)",
+        "kind": "compliance-memo",
+        "date": "2026-03-01",
+        "text": "The Treasury Office designated Entity A under Executive Order 13X for material support to a sanctioned activity. The designation triggered the 50% rule, which automatically extended sanctions to subsidiaries Entity B and Entity C (each more than 50% owned by Entity A). A correspondent bank, Bank Z, processed a payment from Entity B to Entity D the day before the designation was published. Subsequent OFAC guidance clarified that the payment, made in good faith and prior to the public posting, would not constitute a violation, but ongoing relationships with Entity D — a non-designated counterparty closely linked to Entity A — would require enhanced due diligence. Entity D denies any operational link to Entity A and has filed a formal challenge to its inclusion in the related-party monitoring list."
+      }
+    ],
+    "question": "Reconstruct the causal chain underneath this paragraph. Distinguish causal relations (with explicit mechanism) from mere temporal precedence. Identify the constraint that automatically extends sanctions, and surface the contested claim from Entity D."
+  },
+  "gold": {
+    "primitives": [
+      { "id": "treasury", "type": "actor", "label": "Treasury Office", "provenance": "sanctions-narrative" },
+      { "id": "ofac",     "type": "actor", "label": "OFAC",            "provenance": "sanctions-narrative" },
+      { "id": "ent-a",    "type": "actor", "label": "Entity A (designated)", "provenance": "sanctions-narrative" },
+      { "id": "ent-b",    "type": "actor", "label": "Entity B (subsidiary)", "provenance": "sanctions-narrative" },
+      { "id": "ent-c",    "type": "actor", "label": "Entity C (subsidiary)", "provenance": "sanctions-narrative" },
+      { "id": "ent-d",    "type": "actor", "label": "Entity D (non-designated, related-party monitored)", "provenance": "sanctions-narrative" },
+      { "id": "bank-z",   "type": "actor", "label": "Bank Z (correspondent)", "provenance": "sanctions-narrative" },
+      { "id": "ev-designation", "type": "event", "label": "Treasury designates Entity A under EO 13X", "provenance": "sanctions-narrative" },
+      { "id": "ev-extension",    "type": "event", "label": "Sanctions automatically extend to Entity B and Entity C via 50% rule", "provenance": "sanctions-narrative" },
+      { "id": "ev-payment",      "type": "event", "label": "Bank Z processes payment from Entity B to Entity D (day before publication)", "provenance": "sanctions-narrative" },
+      { "id": "ev-guidance",     "type": "event", "label": "OFAC guidance clarifies good-faith-prior-payment carve-out", "provenance": "sanctions-narrative" },
+      { "id": "constraint-50pct","type": "constraint", "label": "OFAC 50% rule — sanctioned-entity ownership thresholds extend designations automatically", "provenance": "sanctions-narrative" },
+      { "id": "claim-d-denial",  "type": "claim", "label": "Entity D denies any operational link to Entity A; formally challenges related-party monitoring inclusion", "provenance": "sanctions-narrative" }
+    ],
+    "edges": [
+      { "from": "treasury",  "to": "ev-designation", "type": "ASSERTED",        "provenance": "sanctions-narrative" },
+      { "from": "ev-designation", "to": "ev-extension", "type": "CAUSES",       "provenance": "sanctions-narrative", "attributes": { "mechanism": "OFAC 50% rule", "conditions": "subsidiary majority ownership" } },
+      { "from": "ev-extension",   "to": "constraint-50pct", "type": "CONSTRAINED_BY", "provenance": "sanctions-narrative" },
+      { "from": "ev-payment", "to": "ev-designation", "type": "PRECEDES",        "provenance": "sanctions-narrative" },
+      { "from": "ofac",       "to": "ev-guidance",    "type": "ASSERTED",        "provenance": "sanctions-narrative" },
+      { "from": "ev-guidance","to": "ev-payment",     "type": "ENABLES",         "provenance": "sanctions-narrative", "attributes": { "mechanism": "good-faith-prior-publication carve-out" } },
+      { "from": "ent-d",      "to": "claim-d-denial", "type": "ASSERTED",        "provenance": "sanctions-narrative" }
+    ]
+  },
+  "rubric": {
+    "scoring": "graph_overlap",
+    "graph_overlap_target": 0.78,
+    "provenance_f1_target": 0.93
+  }
+}

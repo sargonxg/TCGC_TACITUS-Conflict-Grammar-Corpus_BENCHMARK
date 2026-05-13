@@ -69,6 +69,20 @@ That's it. No GPUs required. No paid API calls unless your runner needs them. Th
 
 ---
 
+## Early results — does it actually measure something?
+
+Yes. See [**RESULTS.md**](RESULTS.md) for three honestly-produced reasoning traces (Melian Dialogue, regulatory commitment mismatch, sanctions causal chain) where the **same frontier model** produced (a) a vanilla chat response and (b) a TCGC-style typed output. The vanilla output reads fluently. The typed output is what is actually usable downstream. The gap is structural, not stylistic; it does not close with a larger model.
+
+A flavour of what those traces surface:
+
+- **Causal vs temporal collapse.** Vanilla output uses "which" to bridge an event-pair, hiding whether the relation is `CAUSES` (with mechanism + conditions populated) or merely `PRECEDES`. The validator rejects `CAUSES` without those fields. The discipline forces the model to commit, in writing, to *why* it thinks A caused B.
+- **Commitment / claim conflation.** Vanilla output collapses two distinct commitments into "commitments" plural; the typed output keeps them separate with independent `status` and `valid_time` fields. A compliance dashboard cannot ask "which specific commitment was walked back first?" from prose.
+- **Contradiction averaging.** Vanilla output paraphrases conflicting passages into one. Typed output emits two `Claim` nodes plus a `CONTRADICTS` edge with materiality and rationale.
+
+Formal benchmark scoring with the scorer commit SHA lands in v0.2 (Q3 2026). The traces in `RESULTS.md` are early evidence that what TCGC measures is real and reproducible.
+
+---
+
 ## What it tests, exactly
 
 **14 task types** (v0.1) and **3 dynamic-ontology task types** (v0.2 design freeze Q3 2026):

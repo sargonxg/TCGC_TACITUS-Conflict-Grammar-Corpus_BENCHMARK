@@ -1,0 +1,76 @@
+{
+  "id": "tcgc-0016",
+  "task_type": "commitment-claim-mismatch",
+  "domain": "policy",
+  "license": "CC-BY-NC-SA-4.0",
+  "source": {
+    "collection": "v0.2-public-domain",
+    "collected_on": "2026-05-13",
+    "annotators": ["A1","A3"],
+    "inter_annotator_kappa": 0.79
+  },
+  "inputs": {
+    "documents": [
+      {
+        "id": "consultation-letter",
+        "title": "Agency consultation letter (synthetic-policy)",
+        "kind": "official-letter",
+        "date": "2026-02-14",
+        "text": "The Authority confirms it will publish revised guidance on dual-use compute exports before the end of Q3, taking into account the responses received during the public consultation. The Authority remains committed to a 60-day implementation grace period for any new licensing thresholds."
+      },
+      {
+        "id": "trade-body-acknowledgement",
+        "title": "Trade body acknowledgement memo (synthetic-policy)",
+        "kind": "industry-memo",
+        "date": "2026-02-21",
+        "text": "We welcome the Authority's commitment to revised guidance by Q3 and to the 60-day grace period. The membership particularly notes the inclusive consultation process and looks forward to the next round of bilateral engagement."
+      },
+      {
+        "id": "panel-transcript",
+        "title": "Conference panel transcript — Authority Director (synthetic-policy)",
+        "kind": "transcript",
+        "date": "2026-05-09",
+        "text": "DIRECTOR: 'Look, we never said we'd publish before Q3 — what we said was that we'd consider publication. The grace period is a target, not a binding undertaking. We've always been clear that the policy environment evolves and we cannot pre-commit. The public consultation informs our thinking; it does not bind us.'"
+      }
+    ],
+    "question": "Identify the gap between what the Authority committed to in February and what the Director claimed in May. Surface the typed commitment status transitions, the claim modalities involved, and the material vs cosmetic dimensions of the mismatch."
+  },
+  "gold": {
+    "primitives": [
+      { "id": "authority",     "type": "actor", "label": "The Authority", "provenance": "consultation-letter" },
+      { "id": "director",      "type": "actor", "label": "Authority Director", "provenance": "panel-transcript" },
+      { "id": "trade-body",    "type": "actor", "label": "Industry trade body",   "provenance": "trade-body-acknowledgement" },
+      { "id": "cm-guidance",   "type": "commitment", "label": "Publish revised dual-use compute guidance before end of Q3", "status": "contested", "provenance": ["consultation-letter","panel-transcript"] },
+      { "id": "cm-grace",      "type": "commitment", "label": "60-day implementation grace period for new licensing thresholds", "status": "contested", "provenance": ["consultation-letter","panel-transcript"] },
+      { "id": "claim-denial",  "type": "claim", "label": "Director's denial: 'we said we'd consider publication, not commit'; grace period is 'target, not binding'", "provenance": "panel-transcript" }
+    ],
+    "edges": [
+      { "from": "authority", "to": "cm-guidance", "type": "COMMITS_TO", "provenance": "consultation-letter" },
+      { "from": "authority", "to": "cm-grace",    "type": "COMMITS_TO", "provenance": "consultation-letter" },
+      { "from": "trade-body","to": "cm-guidance", "type": "ACKNOWLEDGED", "provenance": "trade-body-acknowledgement" },
+      { "from": "trade-body","to": "cm-grace",    "type": "ACKNOWLEDGED", "provenance": "trade-body-acknowledgement" },
+      { "from": "director",  "to": "claim-denial","type": "ASSERTED",       "provenance": "panel-transcript" },
+      { "from": "director",  "to": "cm-guidance", "type": "DENIES_SCOPE",   "provenance": "panel-transcript" },
+      { "from": "director",  "to": "cm-grace",    "type": "DENIES_SCOPE",   "provenance": "panel-transcript" }
+    ],
+    "contradictions": [
+      {
+        "claim_a": "cm-guidance",
+        "claim_b": "claim-denial",
+        "materiality": "material",
+        "rationale": "The Authority's written commitment to publish before Q3 is contradicted by the Director's spoken claim that publication was only 'considered'. Material because regulated parties have planning rights based on the written commitment."
+      },
+      {
+        "claim_a": "cm-grace",
+        "claim_b": "claim-denial",
+        "materiality": "material",
+        "rationale": "The grace-period commitment is reframed as a non-binding target. Material because compliance teams allocate resources based on grace-period guarantees."
+      }
+    ]
+  },
+  "rubric": {
+    "scoring": "graph_overlap",
+    "graph_overlap_target": 0.82,
+    "provenance_f1_target": 0.94
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "id": "tcgc-0019",
+  "task_type": "constraint-extraction",
+  "domain": "diplomatic",
+  "license": "CC-BY-NC-SA-4.0",
+  "source": {
+    "collection": "v0.2-public-domain",
+    "collected_on": "2026-05-13",
+    "annotators": ["A1","A4"],
+    "inter_annotator_kappa": 0.85
+  },
+  "inputs": {
+    "documents": [
+      {
+        "id": "treaty-text-extract",
+        "title": "Treaty ratification with reservations (synthetic)",
+        "kind": "diplomatic-instrument",
+        "date": "2026-01-15",
+        "text": "State X ratifies the Convention on Cross-Border Data Flows with the following reservations: (i) Article 4(2) on automatic data transfers shall apply only between State X and Convention parties that have ratified without reservation; (ii) the obligations under Article 7 (judicial cooperation) are conditional on the existence of a bilateral mutual-legal-assistance treaty; (iii) State X reserves the right to suspend any obligation under Article 9 in cases of national security, subject to a 30-day notice to the depositary."
+      },
+      {
+        "id": "secretariat-note",
+        "title": "Convention Secretariat note (synthetic)",
+        "kind": "depositary-note",
+        "date": "2026-02-02",
+        "text": "The Secretariat notes that State X's reservation (i) creates an asymmetric obligations matrix: reciprocity is restricted to the subset of parties without reservations on the same article. Reservation (iii) is procedural and does not modify substantive obligations beyond the explicit notice period. The depositary will circulate the text of the reservations to all Convention parties under Article 22(3)."
+      }
+    ],
+    "question": "Extract every constraint operating in this ratification scenario. Distinguish hard binding constraints from soft procedural ones. Identify the typed binding-strength and the scope of each reservation."
+  },
+  "gold": {
+    "primitives": [
+      { "id": "state-x", "type": "actor", "label": "State X (ratifying party)", "provenance": "treaty-text-extract" },
+      { "id": "secretariat", "type": "actor", "label": "Convention Secretariat (depositary)", "provenance": "secretariat-note" },
+      { "id": "constraint-r1", "type": "constraint", "label": "Reservation (i): Article 4(2) applies only to non-reserving parties (asymmetric reciprocity)", "provenance": "treaty-text-extract" },
+      { "id": "constraint-r2", "type": "constraint", "label": "Reservation (ii): Article 7 obligations conditional on bilateral MLAT existence", "provenance": "treaty-text-extract" },
+      { "id": "constraint-r3", "type": "constraint", "label": "Reservation (iii): Article 9 suspension on national-security grounds, 30-day notice to depositary", "provenance": "treaty-text-extract" },
+      { "id": "constraint-22-3", "type": "constraint", "label": "Convention Article 22(3): depositary circulates reservations to all parties", "provenance": "secretariat-note" }
+    ],
+    "edges": [
+      { "from": "state-x",      "to": "constraint-r1",   "type": "ASSERTED",       "provenance": "treaty-text-extract" },
+      { "from": "state-x",      "to": "constraint-r2",   "type": "ASSERTED",       "provenance": "treaty-text-extract" },
+      { "from": "state-x",      "to": "constraint-r3",   "type": "ASSERTED",       "provenance": "treaty-text-extract" },
+      { "from": "secretariat",  "to": "constraint-22-3", "type": "CITES",          "provenance": "secretariat-note" },
+      { "from": "constraint-r1","to": "constraint-22-3", "type": "CONSTRAINED_BY", "provenance": "secretariat-note" }
+    ]
+  },
+  "rubric": {
+    "scoring": "graph_overlap",
+    "graph_overlap_target": 0.82,
+    "provenance_f1_target": 0.93
+  }
+}
