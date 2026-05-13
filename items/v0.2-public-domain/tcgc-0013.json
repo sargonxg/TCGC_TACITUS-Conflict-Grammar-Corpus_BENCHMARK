@@ -1,0 +1,46 @@
+{
+  "id": "tcgc-0013",
+  "task_type": "event-ordering",
+  "domain": "peace-process",
+  "license": "CC-BY-NC-SA-4.0",
+  "source": {
+    "collection": "v0.2-public-domain",
+    "collected_on": "2026-05-13",
+    "annotators": ["A2","A4"],
+    "inter_annotator_kappa": 0.87
+  },
+  "inputs": {
+    "dates_stripped": true,
+    "documents": [
+      {
+        "id": "prince-ch-vii",
+        "title": "The Prince, Chapter VII — Cesare Borgia (extract)",
+        "kind": "treatise",
+        "date": "1532-01-01",
+        "author": "Niccolò Machiavelli",
+        "text": "He had thought to make himself secure against three things: first, against the loss of his old subjects; secondly, against the persuasions of the Pope; thirdly, against the hostility of those who might attack him. He concluded therefore that he ought to lay sure foundations before the death of his father. He destroyed the lords whose lands he had occupied, and won over to himself the Roman gentlemen; he prepared the Pope, and finally he had only to fear the new pontificate. He could not foresee, however, that at the moment of his father's death he himself would be lying mortally sick, and so the third of these designs failed him."
+      }
+    ],
+    "question": "Reconstruct the chronological order in which the events Machiavelli enumerates here actually occurred or were intended to occur (e1..e5). Dates have been stripped. Each step is part of Cesare Borgia's program; the final unforeseen event is also part of the chain."
+  },
+  "gold": {
+    "primitives": [
+      { "id": "e1", "type": "event", "label": "Borgia destroys lords whose lands he had occupied",             "provenance": "prince-ch-vii" },
+      { "id": "e2", "type": "event", "label": "Borgia wins over Roman gentlemen",                              "provenance": "prince-ch-vii" },
+      { "id": "e3", "type": "event", "label": "Borgia prepares (influences) the Pope",                         "provenance": "prince-ch-vii" },
+      { "id": "e4", "type": "event", "label": "Death of Borgia's father (Pope Alexander VI)",                  "provenance": "prince-ch-vii" },
+      { "id": "e5", "type": "event", "label": "Borgia falls mortally ill at moment of his father's death",     "provenance": "prince-ch-vii" }
+    ],
+    "edges": [
+      { "from": "e1", "to": "e2", "type": "PRECEDES", "provenance": "prince-ch-vii" },
+      { "from": "e2", "to": "e3", "type": "PRECEDES", "provenance": "prince-ch-vii" },
+      { "from": "e3", "to": "e4", "type": "PRECEDES", "provenance": "prince-ch-vii" },
+      { "from": "e4", "to": "e5", "type": "PRECEDES", "provenance": "prince-ch-vii" }
+    ],
+    "order": ["e1","e2","e3","e4","e5"]
+  },
+  "rubric": {
+    "scoring": "kendall_tau",
+    "kendall_tau_target": 0.75
+  }
+}

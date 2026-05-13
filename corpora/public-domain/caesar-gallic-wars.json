@@ -1,0 +1,32 @@
+{
+  "id": "caesar-gallic-wars",
+  "title": "Commentaries on the Gallic War",
+  "author": "Julius Caesar",
+  "translator": "W. A. McDevitte and W. S. Bohn",
+  "license": "Public Domain",
+  "source": {
+    "kind": "gutenberg",
+    "url": "https://www.gutenberg.org/cache/epub/10657/pg10657.txt",
+    "edition": "Project Gutenberg EBook #10657 (McDevitte–Bohn translation)",
+    "retrieved": "2026-05-13"
+  },
+  "anchors": [
+    {
+      "id": "caesar-helvetii",
+      "section": "Book I — The Helvetii and the Aedui",
+      "primitives_dense": ["actor", "event", "commitment", "narrative"],
+      "task_types": ["actor-resolution", "commitment-tracking", "event-ordering", "narrative-drift"],
+      "question": "Caesar names dozens of Gallic tribes and individuals across overlapping confederations. Resolve the actor graph for the Helvetian migration episode. Distinguish stated commitments (treaties, hostages) from breached commitments. Note where Caesar's authorial framing of an actor as 'ally' or 'enemy' shifts.",
+      "expected_subgraph_summary": "Multi-actor graph with tribal nesting; commitments of safe passage with explicit breach events; one drift-chain on the Aedui framing across chapters; bridging-actor Dumnorix with role-modality 'covertly hostile' surfaced from contextual cues."
+    },
+    {
+      "id": "caesar-vercingetorix",
+      "section": "Book VII — Alesia",
+      "primitives_dense": ["event", "actor", "leverage", "commitment"],
+      "task_types": ["event-ordering", "causal-chain", "leverage-mapping", "actor-resolution"],
+      "question": "Reconstruct the siege of Alesia: events in order, leverage relations between the besieged, the relief force, and the Roman lines. Identify the commitment Vercingetorix makes to the Gallic confederation and the moment it transitions from Active to Lapsed.",
+      "expected_subgraph_summary": "Bi-temporal event chain across multi-week operation; Roman double-wall (circumvallation + contravallation) as a Procedural-leverage edge; commitment status transitions for Vercingetorix with the surrender event as the explicit trigger."
+    }
+  ],
+  "notes": "McDevitte–Bohn 1869. Caesar's prose is editorially shaped — he is the protagonist and the narrator simultaneously — which makes it an excellent benchmark for *narrative-drift* detection: when does the narrator's framing constitute its own primitive, distinct from the events described?"
+}

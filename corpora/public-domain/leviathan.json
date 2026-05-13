@@ -1,0 +1,40 @@
+{
+  "id": "leviathan",
+  "title": "Leviathan",
+  "author": "Thomas Hobbes",
+  "translator": null,
+  "license": "Public Domain",
+  "source": {
+    "kind": "gutenberg",
+    "url": "https://www.gutenberg.org/cache/epub/3207/pg3207.txt",
+    "edition": "Project Gutenberg EBook #3207 (1651 text)",
+    "retrieved": "2026-05-13"
+  },
+  "anchors": [
+    {
+      "id": "leviathan-state-of-nature",
+      "section": "Part I, Chapter XIII — Natural Condition of Mankind",
+      "primitives_dense": ["claim", "constraint", "narrative", "actor"],
+      "task_types": ["claim-extraction", "narrative-drift", "constraint-extraction"],
+      "question": "Extract Hobbes' typed claims about the state of nature. Which are descriptive (factual), which are normative, which are evaluative? Identify the framing primitive: how does he characterise pre-political man?",
+      "expected_subgraph_summary": "Several claims with mixed modalities — descriptive (war of all against all), normative (life nasty/brutish/short is a consequence), evaluative (no felicity); a single narrative frame ('natural condition') attached to a pre-sovereign actor class."
+    },
+    {
+      "id": "leviathan-covenant",
+      "section": "Part I, Chapter XIV — First and Second Natural Laws and of Contracts",
+      "primitives_dense": ["commitment", "actor", "constraint"],
+      "task_types": ["commitment-tracking", "commitment-claim-mismatch", "position-interest-separation"],
+      "question": "Hobbes' covenant is a Commitment in ACO terms with a specific binding-strength claim. Map who undertakes what to whom under which constraint. What renders the commitment binding? What renders it void in Hobbes' system?",
+      "expected_subgraph_summary": "Mutual commitment between individuals to alienate natural right; sovereign as beneficiary actor; binding-strength edge to fear-of-state-of-nature; void-conditions enumerated (anticipated death, no enforcer)."
+    },
+    {
+      "id": "leviathan-sovereign",
+      "section": "Part II, Chapter XVII — The Causes, Generation, and Definition of a Commonwealth",
+      "primitives_dense": ["actor", "leverage", "narrative"],
+      "task_types": ["leverage-mapping", "narrative-drift", "actor-resolution"],
+      "question": "Compare the sovereign primitive across Hobbes' Leviathan and Machiavelli's The Prince. Same Actor class? Same leverage mechanisms? Same narrative framing? Use the typed graph to surface where they converge and diverge.",
+      "expected_subgraph_summary": "Sovereign as a single actor class with overlapping mechanisms (Coercive, Normative) but divergent narrative frames (Hobbes: terror as basis of peace; Machiavelli: virtù + fortuna)."
+    }
+  ],
+  "notes": "Hobbes 1651, English original. Spelling and capitalisation period-correct. Chapter boundaries stable; section/paragraph numbers vary by printing — use the chapter-level anchor and let the harness narrow the span at runtime."
+}

@@ -1,0 +1,78 @@
+{
+  "id": "tcgc-0014",
+  "task_type": "actor-resolution",
+  "domain": "diplomatic",
+  "license": "CC-BY-NC-SA-4.0",
+  "source": {
+    "collection": "v0.2-public-domain",
+    "collected_on": "2026-05-13",
+    "annotators": ["A1","A2"],
+    "inter_annotator_kappa": 0.78
+  },
+  "inputs": {
+    "documents": [
+      {
+        "id": "gallic-wars-i",
+        "title": "Caesar, Gallic War, Book I (extract)",
+        "kind": "commentary",
+        "date": "0058-01-01",
+        "author": "Julius Caesar",
+        "text": "The Helvetii had persuaded the Tulingi, the Latovici, the Rauraci, and the Boii to join in their migration. The Aedui sent envoys to Caesar to entreat assistance, as did the Ambarri, who were friends and kinsmen of the Aedui. Caesar found that Dumnorix, the brother of Divitiacus, had been the chief author of the embassy to the Helvetii on the part of the Aedui, although he openly professed himself a friend of Rome."
+      }
+    ],
+    "inputs_actors": [
+      { "id": "helvetii",   "label": "Helvetii",    "aliases": [] },
+      { "id": "tulingi",    "label": "Tulingi",     "aliases": [] },
+      { "id": "latovici",   "label": "Latovici",    "aliases": [] },
+      { "id": "rauraci",    "label": "Rauraci",     "aliases": [] },
+      { "id": "boii",       "label": "Boii",        "aliases": [] },
+      { "id": "aedui",      "label": "Aedui",       "aliases": [] },
+      { "id": "ambarri",    "label": "Ambarri",     "aliases": [] },
+      { "id": "caesar",     "label": "Caesar",      "aliases": ["Julius Caesar"] },
+      { "id": "dumnorix",   "label": "Dumnorix",    "aliases": ["brother of Divitiacus"] },
+      { "id": "divitiacus", "label": "Divitiacus",  "aliases": [] }
+    ],
+    "question": "Resolve the actor graph: which tribes are members of the migrating confederation, which are appellants to Caesar, and which individuals belong to which tribe? Note where the text gives a stated role versus a behavioural inference (e.g., Dumnorix professed friendship to Rome while organising opposite).",
+    "actors": [
+      { "id": "helvetii",   "label": "Helvetii" },
+      { "id": "tulingi",    "label": "Tulingi" },
+      { "id": "latovici",   "label": "Latovici" },
+      { "id": "rauraci",    "label": "Rauraci" },
+      { "id": "boii",       "label": "Boii" },
+      { "id": "aedui",      "label": "Aedui" },
+      { "id": "ambarri",    "label": "Ambarri" },
+      { "id": "caesar",     "label": "Caesar" },
+      { "id": "dumnorix",   "label": "Dumnorix" },
+      { "id": "divitiacus", "label": "Divitiacus" }
+    ]
+  },
+  "gold": {
+    "primitives": [
+      { "id": "helvetii",   "type": "actor", "label": "Helvetii (migrating confederation lead)", "provenance": "gallic-wars-i" },
+      { "id": "tulingi",    "type": "actor", "label": "Tulingi (confederation member)",          "provenance": "gallic-wars-i" },
+      { "id": "latovici",   "type": "actor", "label": "Latovici (confederation member)",         "provenance": "gallic-wars-i" },
+      { "id": "rauraci",    "type": "actor", "label": "Rauraci (confederation member)",          "provenance": "gallic-wars-i" },
+      { "id": "boii",       "type": "actor", "label": "Boii (confederation member)",             "provenance": "gallic-wars-i" },
+      { "id": "aedui",      "type": "actor", "label": "Aedui (Roman appellant)",                 "provenance": "gallic-wars-i" },
+      { "id": "ambarri",    "type": "actor", "label": "Ambarri (Roman appellant, Aedui-aligned)", "provenance": "gallic-wars-i" },
+      { "id": "caesar",     "type": "actor", "label": "Caesar (recipient of appeals)",           "provenance": "gallic-wars-i" },
+      { "id": "dumnorix",   "type": "actor", "label": "Dumnorix (Aedui; covertly hostile)",      "provenance": "gallic-wars-i" },
+      { "id": "divitiacus", "type": "actor", "label": "Divitiacus (Aedui; brother of Dumnorix)", "provenance": "gallic-wars-i" }
+    ],
+    "edges": [
+      { "from": "tulingi",  "to": "helvetii", "type": "SUPPORTS", "provenance": "gallic-wars-i" },
+      { "from": "latovici", "to": "helvetii", "type": "SUPPORTS", "provenance": "gallic-wars-i" },
+      { "from": "rauraci",  "to": "helvetii", "type": "SUPPORTS", "provenance": "gallic-wars-i" },
+      { "from": "boii",     "to": "helvetii", "type": "SUPPORTS", "provenance": "gallic-wars-i" },
+      { "from": "aedui",    "to": "caesar",   "type": "ASSERTED", "provenance": "gallic-wars-i" },
+      { "from": "ambarri",  "to": "caesar",   "type": "ASSERTED", "provenance": "gallic-wars-i" },
+      { "from": "dumnorix", "to": "helvetii", "type": "SUPPORTS", "provenance": "gallic-wars-i" },
+      { "from": "dumnorix", "to": "caesar",   "type": "ACKNOWLEDGED_AMBIGUOUSLY", "provenance": "gallic-wars-i" }
+    ]
+  },
+  "rubric": {
+    "scoring": "graph_overlap",
+    "graph_overlap_target": 0.80,
+    "provenance_f1_target": 0.95
+  }
+}

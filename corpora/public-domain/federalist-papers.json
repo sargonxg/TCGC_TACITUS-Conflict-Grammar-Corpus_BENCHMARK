@@ -1,0 +1,40 @@
+{
+  "id": "federalist-papers",
+  "title": "The Federalist Papers",
+  "author": "Alexander Hamilton, James Madison, John Jay",
+  "translator": null,
+  "license": "Public Domain",
+  "source": {
+    "kind": "gutenberg",
+    "url": "https://www.gutenberg.org/cache/epub/1404/pg1404.txt",
+    "edition": "Project Gutenberg EBook #1404",
+    "retrieved": "2026-05-13"
+  },
+  "anchors": [
+    {
+      "id": "federalist-10",
+      "section": "FEDERALIST No. 10 (Madison) — Faction",
+      "primitives_dense": ["actor", "claim", "interest", "constraint", "narrative"],
+      "task_types": ["claim-extraction", "interest-extraction", "position-interest-separation", "narrative-drift"],
+      "question": "Separate Madison's stated position (the necessity of a republican remedy) from the underlying interests he ascribes to (a) propertied minorities and (b) the unpropertied majority. Identify which interests he treats as structurally permanent versus contingent.",
+      "expected_subgraph_summary": "Two interest classes attached to two actor roles, with explicit constraint edges to property as a structural cause of faction; Madison's position cited; the republican-remedy claim linked to the constraint of size."
+    },
+    {
+      "id": "federalist-70",
+      "section": "FEDERALIST No. 70 (Hamilton) — Unity in the Executive",
+      "primitives_dense": ["actor", "claim", "constraint", "leverage"],
+      "task_types": ["claim-extraction", "leverage-mapping", "constraint-extraction"],
+      "question": "Map Hamilton's argument as a typed graph: which constraint shapes are claimed to require executive unity? What leverage mechanisms does he attribute to a unitary executive? Surface the implicit counter-position he is arguing against.",
+      "expected_subgraph_summary": "A unitary-executive actor with three claimed leverage mechanisms (energy, secrecy, dispatch); an implicit Anti-Federalist counter-actor with a claim of guarded-against tyranny; two constraint edges linking republican accountability to executive unity."
+    },
+    {
+      "id": "federalist-78",
+      "section": "FEDERALIST No. 78 (Hamilton) — The Judiciary",
+      "primitives_dense": ["actor", "constraint", "leverage", "commitment"],
+      "task_types": ["leverage-mapping", "constraint-extraction", "commitment-tracking", "commitment-claim-mismatch"],
+      "question": "Hamilton famously calls the judiciary 'the least dangerous branch.' Is that a Claim, an Interest, or a Commitment in the ACO sense? Track the typed inference chain from the structural feature he cites (no will, only judgment) to the political conclusion.",
+      "expected_subgraph_summary": "Claim with a specific modality; constraint edge from 'no will, only judgment' to a leverage-deficit edge; commitment by ratifying actors implicit; the inference chain explicit and source-bound."
+    }
+  ],
+  "notes": "Edition-stable since 1788. The Gutenberg edition uses standard paper numbering. Character offsets are robust across most printings; the canonical paper boundaries are stable. Anti-Federalist counter-positions (Brutus, Cato) are not in this manifest — see `corpora/public-domain/anti-federalist.json` (planned)."
+}

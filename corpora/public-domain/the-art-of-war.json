@@ -1,0 +1,40 @@
+{
+  "id": "the-art-of-war",
+  "title": "The Art of War",
+  "author": "Sun Tzu",
+  "translator": "Lionel Giles",
+  "license": "Public Domain",
+  "source": {
+    "kind": "gutenberg",
+    "url": "https://www.gutenberg.org/cache/epub/132/pg132.txt",
+    "edition": "Project Gutenberg EBook #132 (Giles translation)",
+    "retrieved": "2026-05-13"
+  },
+  "anchors": [
+    {
+      "id": "art-of-war-leverage-typology",
+      "section": "Chapter I — Laying Plans",
+      "primitives_dense": ["leverage", "claim", "narrative", "constraint"],
+      "task_types": ["leverage-mapping", "claim-extraction", "constraint-extraction"],
+      "question": "Sun Tzu enumerates 'five constant factors' that govern war. For each, map it to the leverage-mechanism typology used by the ACO (Resource / Information / Network / Procedural / Coercive / Normative / Reputational). Note where the mapping is partial or contested.",
+      "expected_subgraph_summary": "Five leverage candidates mapped with explicit similarity scores; Moral Law mapping to Normative; Heaven/Earth mapping to Resource/Information; the Commander mapping to Network leverage; partial-credit annotations where the original concept does not cleanly fit a modern mechanism class."
+    },
+    {
+      "id": "art-of-war-deception",
+      "section": "Chapter I.18 — 'All warfare is based on deception'",
+      "primitives_dense": ["narrative", "claim", "leverage"],
+      "task_types": ["narrative-drift", "leverage-mapping", "claim-extraction"],
+      "question": "Deception in Sun Tzu is a Leverage mechanism realised as a Narrative move. Map the typed structure: which leverage class does each deceptive move fall under? Identify the commitment-modality of the deceiver toward the deceived (Asserted? Reported? Withdrawn?).",
+      "expected_subgraph_summary": "Information-leverage edges with narrative-as-mechanism; deceiver actor commitment-modality marked as deliberately misrepresented; cross-link to `commitment-versus-claim` distinction."
+    },
+    {
+      "id": "art-of-war-supreme-excellence",
+      "section": "Chapter III.2 — 'The supreme art of war is to subdue the enemy without fighting'",
+      "primitives_dense": ["leverage", "claim", "narrative", "event"],
+      "task_types": ["claim-extraction", "leverage-mapping", "narrative-drift", "causal-chain"],
+      "question": "Surface Sun Tzu's normative claim. What does 'subdue without fighting' translate to in the ACO? Identify which leverage classes are required to achieve the outcome without an Event of type 'engagement'.",
+      "expected_subgraph_summary": "Normative claim with explicit outcome predicate; leverage classes Information + Network + Normative as required preconditions; absence of the engagement-event treated as the success criterion; one narrative-frame edge ('victory without battle') as the framing primitive."
+    }
+  ],
+  "notes": "Giles 1910 translation. The treatise is unusually clean for benchmarking: short, structured, with explicit enumerated lists that map well to ACO leverage typology. Sun Tzu is also where contemporary AI/policy circles most over-cite — the benchmark tests whether a system can produce the typed structure or only the aphorism."
+}
