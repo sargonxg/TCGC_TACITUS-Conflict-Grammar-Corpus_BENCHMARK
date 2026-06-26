@@ -5,7 +5,12 @@ import json
 from pathlib import Path
 
 from experiments.llm_vs_typed.clients import build_client
-from experiments.llm_vs_typed.compare import _count_ops, _try_parse_jsonl, load_pair, render_markdown
+from experiments.llm_vs_typed.compare import (
+    _count_ops,
+    _try_parse_jsonl,
+    load_pair,
+    render_markdown,
+)
 from experiments.llm_vs_typed.orchestrate import main as orchestrate_main
 from experiments.llm_vs_typed.runner import run_one, write_record
 

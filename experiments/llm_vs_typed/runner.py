@@ -3,7 +3,7 @@ from __future__ import annotations
 
 import json
 from dataclasses import asdict, dataclass
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
@@ -73,7 +73,13 @@ class RunRecord:
     timestamp: str            # ISO-8601
 
 
-def run_one(item: dict[str, Any], client: ModelClient, mode: str, *, temperature: float = 0.0) -> RunRecord:
+def run_one(
+    item: dict[str, Any],
+    client: ModelClient,
+    mode: str,
+    *,
+    temperature: float = 0.0,
+) -> RunRecord:
     """Run a single item through a client in either 'vanilla' or 'typed' mode."""
     if mode not in {"vanilla", "typed"}:
         raise ValueError(f"mode must be 'vanilla' or 'typed', got {mode!r}.")
@@ -96,7 +102,7 @@ def run_one(item: dict[str, Any], client: ModelClient, mode: str, *, temperature
         response_hash=resp.response_hash,
         response_text=resp.text,
         error=resp.error,
-        timestamp=datetime.now(timezone.utc).isoformat(timespec="seconds"),
+        timestamp=datetime.now(UTC).isoformat(timespec="seconds"),
     )
 
 

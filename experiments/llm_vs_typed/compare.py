@@ -77,7 +77,12 @@ def load_pair(item_id: str, runs_dir: Path) -> tuple[RunRecord, RunRecord]:
     return vanilla, typed
 
 
-def render_markdown(item_id: str, vanilla: RunRecord, typed: RunRecord, gold: dict[str, Any]) -> str:
+def render_markdown(  # noqa: PLR0915
+    item_id: str,
+    vanilla: RunRecord,
+    typed: RunRecord,
+    gold: dict[str, Any],
+) -> str:
     """Produce a side-by-side markdown comparison for one item."""
     typed_ops, parse_errors = _try_parse_jsonl(typed.response_text)
     counts = _count_ops(typed_ops)
@@ -114,11 +119,20 @@ def render_markdown(item_id: str, vanilla: RunRecord, typed: RunRecord, gold: di
     lines.append("")
     lines.append(f"- Parsed ops: **{counts['total']}** (parse errors: {parse_errors})")
     lines.append(f"  - CREATE node: {counts['create_node']} · CREATE edge: {counts['create_edge']}")
-    lines.append(f"  - UPDATE status: {counts['update_status']} · INVALIDATE: {counts['invalidate']}")
+    lines.append(
+        f"  - UPDATE status: {counts['update_status']} · "
+        f"INVALIDATE: {counts['invalidate']}"
+    )
     lines.append(f"  - With provenance: {counts['with_provenance']}")
     lines.append(f"  - CAUSES with `mechanism` populated: {counts['causes_with_mechanism']}")
-    lines.append(f"  - CONTRADICTS with `materiality` populated: {counts['contradicts_with_materiality']}")
-    lines.append(f"  - Interests with `derivation` populated: {counts['interests_with_derivation']}")
+    lines.append(
+        f"  - CONTRADICTS with `materiality` populated: "
+        f"{counts['contradicts_with_materiality']}"
+    )
+    lines.append(
+        f"  - Interests with `derivation` populated: "
+        f"{counts['interests_with_derivation']}"
+    )
     lines.append("")
     lines.append("```jsonl")
     lines.append(typed.response_text.strip() or "(empty)")
@@ -144,7 +158,10 @@ def render_markdown(item_id: str, vanilla: RunRecord, typed: RunRecord, gold: di
                  f"0 (no typed output by construction) |")
     lines.append(f"| Edges | {len(gold_edges)} | {counts['create_edge']} | 0 |")
     lines.append(f"| Provenance pointers | required on each | {counts['with_provenance']} | 0 |")
-    lines.append(f"| CAUSES with mechanism | required when present | {counts['causes_with_mechanism']} | 0 |")
+    lines.append(
+        f"| CAUSES with mechanism | required when present | "
+        f"{counts['causes_with_mechanism']} | 0 |"
+    )
     lines.append("")
     lines.append(
         "> The counts above are **shape diagnostics**, not benchmark scores. To produce a real "
