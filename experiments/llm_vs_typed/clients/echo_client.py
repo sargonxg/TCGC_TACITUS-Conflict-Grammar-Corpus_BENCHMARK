@@ -1,4 +1,5 @@
 """Echo client — deterministic, no API call. Used for CI smoke tests."""
+
 from __future__ import annotations
 
 import hashlib

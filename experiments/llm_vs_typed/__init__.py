@@ -6,6 +6,7 @@ reproducible substrate for the v0.2 measured-results publication.
 
 Author: Giulio Catanzariti <giuliocatanzariti@gmail.com>
 """
+
 from __future__ import annotations
 
 __version__ = "0.1.0"

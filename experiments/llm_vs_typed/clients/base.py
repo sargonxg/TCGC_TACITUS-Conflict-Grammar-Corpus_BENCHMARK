@@ -1,4 +1,5 @@
 """Base protocol for model clients."""
+
 from __future__ import annotations
 
 from dataclasses import dataclass
@@ -8,6 +9,7 @@ from typing import Protocol
 @dataclass(frozen=True)
 class ModelResponse:
     """A model response with provenance for honest reporting."""
+
     text: str
     model: str
     temperature: float

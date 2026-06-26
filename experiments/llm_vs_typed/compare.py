@@ -1,4 +1,5 @@
 """Compare vanilla vs typed records for the same item; emit a markdown diff."""
+
 from __future__ import annotations
 
 import json
@@ -95,14 +96,18 @@ def render_markdown(  # noqa: PLR0915
     lines.append("")
     lines.append("## Run provenance")
     lines.append("")
-    lines.append(f"- Vanilla: model `{vanilla.model}` · temp {vanilla.temperature} · "
-                 f"{vanilla.elapsed_ms} ms · api_call={vanilla.api_call_made} · "
-                 f"prompt={vanilla.prompt_hash} · response={vanilla.response_hash} · "
-                 f"`{vanilla.timestamp}`")
-    lines.append(f"- Typed:   model `{typed.model}` · temp {typed.temperature} · "
-                 f"{typed.elapsed_ms} ms · api_call={typed.api_call_made} · "
-                 f"prompt={typed.prompt_hash} · response={typed.response_hash} · "
-                 f"`{typed.timestamp}`")
+    lines.append(
+        f"- Vanilla: model `{vanilla.model}` · temp {vanilla.temperature} · "
+        f"{vanilla.elapsed_ms} ms · api_call={vanilla.api_call_made} · "
+        f"prompt={vanilla.prompt_hash} · response={vanilla.response_hash} · "
+        f"`{vanilla.timestamp}`"
+    )
+    lines.append(
+        f"- Typed:   model `{typed.model}` · temp {typed.temperature} · "
+        f"{typed.elapsed_ms} ms · api_call={typed.api_call_made} · "
+        f"prompt={typed.prompt_hash} · response={typed.response_hash} · "
+        f"`{typed.timestamp}`"
+    )
     if vanilla.error or typed.error:
         lines.append("")
         lines.append("> ⚠️ One or both runs reported an error. See raw JSON in `runs/`.")
@@ -120,18 +125,15 @@ def render_markdown(  # noqa: PLR0915
     lines.append(f"- Parsed ops: **{counts['total']}** (parse errors: {parse_errors})")
     lines.append(f"  - CREATE node: {counts['create_node']} · CREATE edge: {counts['create_edge']}")
     lines.append(
-        f"  - UPDATE status: {counts['update_status']} · "
-        f"INVALIDATE: {counts['invalidate']}"
+        f"  - UPDATE status: {counts['update_status']} · INVALIDATE: {counts['invalidate']}"
     )
     lines.append(f"  - With provenance: {counts['with_provenance']}")
     lines.append(f"  - CAUSES with `mechanism` populated: {counts['causes_with_mechanism']}")
     lines.append(
-        f"  - CONTRADICTS with `materiality` populated: "
-        f"{counts['contradicts_with_materiality']}"
+        f"  - CONTRADICTS with `materiality` populated: {counts['contradicts_with_materiality']}"
     )
     lines.append(
-        f"  - Interests with `derivation` populated: "
-        f"{counts['interests_with_derivation']}"
+        f"  - Interests with `derivation` populated: {counts['interests_with_derivation']}"
     )
     lines.append("")
     lines.append("```jsonl")
@@ -154,13 +156,14 @@ def render_markdown(  # noqa: PLR0915
     lines.append("")
     lines.append("| Axis | Gold | Typed run | Vanilla run |")
     lines.append("|---|---|---|---|")
-    lines.append(f"| Primitives | {len(gold_primitives)} | {counts['create_node']} | "
-                 f"0 (no typed output by construction) |")
+    lines.append(
+        f"| Primitives | {len(gold_primitives)} | {counts['create_node']} | "
+        f"0 (no typed output by construction) |"
+    )
     lines.append(f"| Edges | {len(gold_edges)} | {counts['create_edge']} | 0 |")
     lines.append(f"| Provenance pointers | required on each | {counts['with_provenance']} | 0 |")
     lines.append(
-        f"| CAUSES with mechanism | required when present | "
-        f"{counts['causes_with_mechanism']} | 0 |"
+        f"| CAUSES with mechanism | required when present | {counts['causes_with_mechanism']} | 0 |"
     )
     lines.append("")
     lines.append(

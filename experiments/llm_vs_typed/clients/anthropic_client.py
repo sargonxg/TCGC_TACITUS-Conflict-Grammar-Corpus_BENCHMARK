@@ -1,4 +1,5 @@
 """Anthropic client. Wraps the official SDK with the experiments contract."""
+
 from __future__ import annotations
 
 import hashlib
@@ -40,9 +41,7 @@ class AnthropicClient:
             )
             elapsed_ms = int((time.monotonic() - start) * 1000)
             # Concatenate all text blocks (Claude returns a list).
-            text = "".join(
-                getattr(block, "text", "") for block in msg.content
-            )
+            text = "".join(getattr(block, "text", "") for block in msg.content)
             return ModelResponse(
                 text=text,
                 model=self.model,

@@ -1,4 +1,5 @@
 """Smoke tests for the experiments/llm_vs_typed/ harness using the echo client."""
+
 from __future__ import annotations
 
 import json
@@ -71,11 +72,16 @@ def test_jsonl_parser_counts() -> None:
 def test_orchestrate_dry_run(tmp_path: Path, capsys) -> None:
     out_dir = tmp_path / "echo-run"
     items_glob = Path(__file__).parent.parent / "items" / "v0.1-sample" / "tcgc-0001.json"
-    exit_code = orchestrate_main([
-        "--client", "echo",
-        "--items", str(items_glob),
-        "--out-dir", str(out_dir),
-    ])
+    exit_code = orchestrate_main(
+        [
+            "--client",
+            "echo",
+            "--items",
+            str(items_glob),
+            "--out-dir",
+            str(out_dir),
+        ]
+    )
     assert exit_code == 0
     assert (out_dir / "tcgc-0001__vanilla.json").exists()
     assert (out_dir / "tcgc-0001__typed.json").exists()
@@ -85,11 +91,16 @@ def test_orchestrate_report(tmp_path: Path) -> None:
     # First run a small dry-run.
     out_dir = tmp_path / "echo-run"
     items_glob = Path(__file__).parent.parent / "items" / "v0.1-sample" / "tcgc-0001.json"
-    orchestrate_main([
-        "--client", "echo",
-        "--items", str(items_glob),
-        "--out-dir", str(out_dir),
-    ])
+    orchestrate_main(
+        [
+            "--client",
+            "echo",
+            "--items",
+            str(items_glob),
+            "--out-dir",
+            str(out_dir),
+        ]
+    )
     # Then produce a report.
     exit_code = orchestrate_main(["--report", str(out_dir)])
     assert exit_code == 0

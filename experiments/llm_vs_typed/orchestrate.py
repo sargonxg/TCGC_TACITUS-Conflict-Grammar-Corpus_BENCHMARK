@@ -38,6 +38,7 @@ Conventions
   CI and for smoke-testing your runner before you spend tokens.
 - The orchestrator NEVER edits files outside `--out-dir`.
 """
+
 from __future__ import annotations
 
 import argparse
@@ -62,17 +63,22 @@ def _load(path: Path) -> dict[str, Any]:
 
 
 def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(prog="tcgc-experiment",
-                                     description="Run vanilla + typed against TCGC items.")
-    parser.add_argument("--client", default="echo",
-                        help="Client spec: 'echo' | 'anthropic:<model>' | 'openai:<model>'.")
-    parser.add_argument("--items", type=Path, default=Path("items"),
-                        help="Item file or directory.")
-    parser.add_argument("--out-dir", type=Path,
-                        help="Where to write per-item records and the REPORT.md.")
+    parser = argparse.ArgumentParser(
+        prog="tcgc-experiment", description="Run vanilla + typed against TCGC items."
+    )
+    parser.add_argument(
+        "--client",
+        default="echo",
+        help="Client spec: 'echo' | 'anthropic:<model>' | 'openai:<model>'.",
+    )
+    parser.add_argument("--items", type=Path, default=Path("items"), help="Item file or directory.")
+    parser.add_argument(
+        "--out-dir", type=Path, help="Where to write per-item records and the REPORT.md."
+    )
     parser.add_argument("--temperature", type=float, default=0.0)
-    parser.add_argument("--report", type=Path,
-                        help="Skip the run; produce REPORT.md from an existing run dir.")
+    parser.add_argument(
+        "--report", type=Path, help="Skip the run; produce REPORT.md from an existing run dir."
+    )
     args = parser.parse_args(argv)
 
     if args.report:
@@ -82,11 +88,13 @@ def main(argv: list[str] | None = None) -> int:
             print(f"No run records found in {run_dir}", file=sys.stderr)
             return 2
         # Gold items live under items/; for the report we need the gold JSON.
-        report_md = ["# Experiment report — `" + run_dir.name + "`",
-                     "",
-                     "Side-by-side vanilla vs typed comparison across the items in this run.",
-                     "All counts in this report are SHAPE DIAGNOSTICS, not benchmark scores.",
-                     ""]
+        report_md = [
+            "# Experiment report — `" + run_dir.name + "`",
+            "",
+            "Side-by-side vanilla vs typed comparison across the items in this run.",
+            "All counts in this report are SHAPE DIAGNOSTICS, not benchmark scores.",
+            "",
+        ]
         for item_id in items:
             try:
                 vanilla, typed = load_pair(item_id, run_dir)
@@ -111,8 +119,10 @@ def main(argv: list[str] | None = None) -> int:
     client = build_client(args.client)
     api_warning_shown = False
     if args.client == "echo":
-        print("[info] Using echo client. No API calls will be made. "
-              "Use --client anthropic:<model> or openai:<model> for measured runs.")
+        print(
+            "[info] Using echo client. No API calls will be made. "
+            "Use --client anthropic:<model> or openai:<model> for measured runs."
+        )
         api_warning_shown = True
 
     paths = _iter_items(args.items)
@@ -126,8 +136,11 @@ def main(argv: list[str] | None = None) -> int:
         item = _load(item_path)
         for mode in ("vanilla", "typed"):
             done += 1
-            print(f"[{done:>3}/{total}] {item['id']} :: {mode} ({client.name}:{client.model}) …",
-                  end=" ", flush=True)
+            print(
+                f"[{done:>3}/{total}] {item['id']} :: {mode} ({client.name}:{client.model}) …",
+                end=" ",
+                flush=True,
+            )
             record = run_one(item, client, mode, temperature=args.temperature)
             write_record(record, args.out_dir)
             tag = "ERR" if record.error else "OK"

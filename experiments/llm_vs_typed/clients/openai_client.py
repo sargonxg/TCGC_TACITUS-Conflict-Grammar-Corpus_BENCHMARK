@@ -1,4 +1,5 @@
 """OpenAI client. Wraps the official SDK with the experiments contract."""
+
 from __future__ import annotations
 
 import hashlib

@@ -1,4 +1,5 @@
 """Single-item runner. Given a TCGC item, a client, and a mode, produce a record."""
+
 from __future__ import annotations
 
 import json
@@ -22,11 +23,7 @@ def _render_prompt(template_path: Path, *, question: str, documents: str) -> tup
     system = system_raw.replace("SYSTEM:", "", 1).strip()
     # Drop the parenthetical schema/template line and keep the body.
     user_body = user_raw.split("\n", 1)[1] if "\n" in user_raw else ""
-    user = (
-        user_body.replace("{question}", question)
-        .replace("{documents}", documents)
-        .strip()
-    )
+    user = user_body.replace("{question}", question).replace("{documents}", documents).strip()
     return system, user
 
 
@@ -49,9 +46,7 @@ def _serialise_documents(inputs: dict[str, Any]) -> str:
             f"[{m.get('id', '')}] {m.get('from', '')} ({m.get('time', '')}): {m.get('text', '')}"
         )
     for t in inputs.get("transcript", []):
-        parts.append(
-            f"[turn:{t.get('turn')}] {t.get('speaker', '')}: {t.get('text', '')}"
-        )
+        parts.append(f"[turn:{t.get('turn')}] {t.get('speaker', '')}: {t.get('text', '')}")
     return "\n\n---\n\n".join(parts)
 
 
@@ -60,7 +55,7 @@ class RunRecord:
     item_id: str
     task_type: str
     domain: str
-    mode: str                 # "vanilla" | "typed"
+    mode: str  # "vanilla" | "typed"
     client_name: str
     model: str
     temperature: float
@@ -70,7 +65,7 @@ class RunRecord:
     response_hash: str
     response_text: str
     error: str | None
-    timestamp: str            # ISO-8601
+    timestamp: str  # ISO-8601
 
 
 def run_one(
