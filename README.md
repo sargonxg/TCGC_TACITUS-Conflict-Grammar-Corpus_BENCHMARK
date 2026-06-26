@@ -10,6 +10,9 @@
 [![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](pyproject.toml)
 [![mypy strict](https://img.shields.io/badge/mypy-strict-success.svg)](pyproject.toml)
 [![tests](https://img.shields.io/badge/coverage-92%25-brightgreen.svg)](tests/)
+[![CI](https://github.com/sargonxg/TCGC_TACITUS-Conflict-Grammar-Corpus_BENCHMARK/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/sargonxg/TCGC_TACITUS-Conflict-Grammar-Corpus_BENCHMARK/actions/workflows/ci.yml)
+[![Docs](https://github.com/sargonxg/TCGC_TACITUS-Conflict-Grammar-Corpus_BENCHMARK/actions/workflows/docs.yml/badge.svg?branch=main)](https://github.com/sargonxg/TCGC_TACITUS-Conflict-Grammar-Corpus_BENCHMARK/actions/workflows/docs.yml)
+[![Leaderboard](https://github.com/sargonxg/TCGC_TACITUS-Conflict-Grammar-Corpus_BENCHMARK/actions/workflows/leaderboard.yml/badge.svg?branch=main)](https://github.com/sargonxg/TCGC_TACITUS-Conflict-Grammar-Corpus_BENCHMARK/actions/workflows/leaderboard.yml)
 [![ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/charliermarsh/ruff/main/assets/badge/v2.json)](https://github.com/charliermarsh/ruff)
 [![Homepage](https://img.shields.io/badge/Homepage-tacitus.me%2Fresearch%2Ftcgc-00D1B2.svg)](https://www.tacitus.me/research/tcgc)
 
