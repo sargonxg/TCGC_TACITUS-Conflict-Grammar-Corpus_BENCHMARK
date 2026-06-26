@@ -17,6 +17,16 @@
 
 ---
 
+## 30-Second Read
+
+- **What it is**: an open benchmark for structural conflict reasoning.
+- **What it scores**: typed graph output, including actors, claims, interests, constraints, commitments, events, narratives, contradictions, and source spans.
+- **What is real today**: schema, sample items, public-domain corpus manifests, validation/scoring CLI, adapters, examples, and an experiment harness.
+- **What is not claimed yet**: final measured leaderboard results. Current examples are illustrative until provider runs are completed and published.
+- **Best place to start**: run the [Quickstart](#quickstart-60-seconds), then read [RESULTS.md](RESULTS.md) for the current evidence boundary.
+
+---
+
 ## What this is
 
 A **benchmark** for whether an AI system can read complex policy, mediation, and conflict texts the way a careful analyst reads them — *as typed structure*, not as paraphrase.
