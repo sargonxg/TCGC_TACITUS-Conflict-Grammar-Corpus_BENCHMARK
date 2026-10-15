@@ -38,8 +38,8 @@ adapters = ["lm-eval>=0.4"]
 
 [project.urls]
 Homepage = "https://www.tacitus.me/research/tcgc"
-Repository = "https://github.com/tacitus-me/tcgc"
-Issues = "https://github.com/tacitus-me/tcgc/issues"
+Repository = "https://github.com/sargonxg/TCGC_TACITUS-Conflict-Grammar-Corpus_BENCHMARK"
+Issues = "https://github.com/sargonxg/TCGC_TACITUS-Conflict-Grammar-Corpus_BENCHMARK/issues"
 
 [project.scripts]
 tcgc = "tcgc.cli:app"
