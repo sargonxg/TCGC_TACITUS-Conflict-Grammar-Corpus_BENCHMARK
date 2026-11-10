@@ -16,6 +16,10 @@
 
 ---
 
+## Inspect a real policy drafting run
+
+The [workflow-recording inspector](experiments/policy_workflow_inspection) reports citation-ID coverage, retained qualification flags and actual provider usage for a public Syria drafting example. It is separate from the TCGC corpus and official scoring protocol. The flat and structured model outputs both resolve their citations; one task does not establish model-quality or efficiency gains.
+
 ## 30-second read
 
 - **What it is:** a schema, corpus, scoring toolkit, CLI, adapters, and experiment harness for evaluating typed graph output rather than free-form prose alone.

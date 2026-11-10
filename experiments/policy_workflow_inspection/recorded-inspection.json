@@ -1,0 +1,71 @@
+{
+  "format": "tacitus-policy-workflow-inspection/1",
+  "scope": "Recorded execution and reference integrity only. No TCGC corpus score or general model-quality comparison.",
+  "results": [
+    {
+      "file": "flat-run/workflow-result.json",
+      "sha256": "457024d76a7000d75d34b3cc51f82ebefb6647addb63728295f72d52ef552ff9",
+      "arm": "flat",
+      "model_calls": 1,
+      "usage_reported": {
+        "completion_tokens": 489,
+        "neurons": 121.24392700195312,
+        "prompt_tokens": 791,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "total_tokens": 1280
+      },
+      "items": 6,
+      "selected_evidence_records": 3,
+      "cited_evidence_records": 3,
+      "unknown_citation_ids": [],
+      "draft_items_with_literal_qualification_flags": 5,
+      "semantic_entailment": "not_evaluated",
+      "expert_review": "not_recorded",
+      "tcgc_benchmark_score": "not_applicable"
+    },
+    {
+      "file": "structured-run/workflow-result.json",
+      "sha256": "14dd88e98d16919c1c9c3d37ae501699343f05d657c645345b7dd25470002d40",
+      "arm": "structured",
+      "model_calls": 1,
+      "usage_reported": {
+        "completion_tokens": 330,
+        "neurons": 109.16065979003906,
+        "prompt_tokens": 1559,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "total_tokens": 1889
+      },
+      "items": 3,
+      "selected_evidence_records": 3,
+      "cited_evidence_records": 3,
+      "unknown_citation_ids": [],
+      "draft_items_with_literal_qualification_flags": 2,
+      "semantic_entailment": "not_evaluated",
+      "expert_review": "not_recorded",
+      "tcgc_benchmark_score": "not_applicable"
+    },
+    {
+      "file": "agent-step-2/workflow-result.json",
+      "sha256": "cddbc5647e92a294d499bacef45fe4813e8110be9155331e12d71e203afad48c",
+      "arm": "bounded_agent",
+      "model_calls": 2,
+      "usage_reported": {
+        "completion_tokens": 372,
+        "prompt_tokens": 2055,
+        "total_tokens": 2427
+      },
+      "items": 3,
+      "selected_evidence_records": 3,
+      "cited_evidence_records": 3,
+      "unknown_citation_ids": [],
+      "draft_items_with_literal_qualification_flags": 2,
+      "semantic_entailment": "not_evaluated",
+      "expert_review": "not_recorded",
+      "tcgc_benchmark_score": "not_applicable"
+    }
+  ]
+}
