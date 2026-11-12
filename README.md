@@ -2,6 +2,21 @@
 
 # TCGC
 
+<!-- tacitus-practical-entry -->
+## Purpose, code and a playable introduction
+
+Evaluate typed conflict/policy output for structure, chronology and provenance rather than grading fluent text alone.
+
+**Evaluation research.** Alpha benchmark; synthetic fixtures and structural scores do not establish domain-expert analytical quality or a public leaderboard result.
+
+[Setup, code walkthrough, research & verification](TACITUS_GUIDE.md) · [Play the original 8-bit teaching adventure](tacitus-demo/index.html) · [Demo credits](tacitus-demo/CREDITS.md)
+
+![The original House of Evidence teaching adventure; synthetic case, separate from this project’s runtime](tacitus-demo/mansion.png)
+
+Research: [RAG](https://arxiv.org/abs/2005.11401), [long-context evidence use](https://arxiv.org/abs/2307.03172), [GraphRAG](https://arxiv.org/abs/2404.16130). [What TACITUS borrows, adds and still needs to measure](https://github.com/sargonxg/sargonxg/blob/main/docs/RESEARCH_AND_DESIGN.md).
+<!-- /tacitus-practical-entry -->
+
+
 ### TACITUS Conflict Grammar Corpus
 
 **An alpha benchmark and corpus for evaluating structured, source-grounded analysis of conflict and policy text.**
